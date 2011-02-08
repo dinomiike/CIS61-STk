@@ -1,0 +1,13 @@
+(define (lab2_1 pt item)
+  (if (equal? (empty? item) #f)
+      (+1 (lab2_1 pt (bf item))))
+)
+
+(define (lab pt item)
+  (if (equal? (empty? item) #f)
+      (if (equal? (first item) pt)
+	  (+ 1 (if (> (count item) 0) (lab pt (bf item))))
+	  (if (> (count item) 1) (lab pt (bf item)))
+      )
+  )
+)

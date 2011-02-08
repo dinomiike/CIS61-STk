@@ -1,0 +1,16 @@
+okay
+STk> (load "~/Documents/projects/CIS61-STk/Chapter1/lab2/lab2_2.scm")
+okay
+STk> (lab2_2 5 3 9)
+106
+STk> (lab2_2 5 5 1)
+50
+STk> (lab2_2 1 2 3 4 5)
+*** Error:
+    too many arguments to: (lab2_2 1 2 3 4 5)
+Current eval stack:
+__________________
+  0    (lab2_2 1 2 3 4 5)
+STk> (lab2_2 1 2 3)
+13
+STk> (transcript-off)

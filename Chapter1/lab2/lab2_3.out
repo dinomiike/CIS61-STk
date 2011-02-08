@@ -1,0 +1,14 @@
+okay
+STk> (load "~/Documents/projects/CIS61-STk/Chapter1/lab2/lab2_3.scm")
+okay
+STk> (trueOrfalse #t)
+true
+STk> (trueOrfalse 'apple)
+true
+STk> (trueOrfalse #f)
+false
+STk> (trueOrfalse (= 1 2))
+false
+STk> (trueOrfalse (equal? '(Donkey Kong) '(Donkey Kong)))
+true
+STk> (transcript-off)

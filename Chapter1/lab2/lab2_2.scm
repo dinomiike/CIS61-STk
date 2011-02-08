@@ -1,0 +1,7 @@
+(define (lab2_2 a b c)
+  (cond ((> a b) (define x (* a a))
+	 (cond ((> b c) (define y (* b b)))
+	       (else (define y (* c c)))))
+	(else (define x (* b b))
+	      (cond ((> a c) (define y (* a a)))
+		    (else (define y (* c c)))))) (+ x y))
