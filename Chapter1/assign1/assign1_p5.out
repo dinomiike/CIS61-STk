@@ -1,0 +1,10 @@
+okay
+STk> (load "/Users/Mikey/Documents/Projects/git/CIS61-STk/Chapter1/assign1_p5.scm")
+okay
+STk> (squares '(1 2 3 4 5))
+(1 4 9 16 25)
+STk> (squares '(5 3 9))
+(25 9 81)
+STk> (squares '(100 15 76))
+(10000 225 5776)
+STk> (transcript-off)

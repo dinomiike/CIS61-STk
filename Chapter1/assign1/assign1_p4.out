@@ -1,0 +1,12 @@
+okay
+STk> (load "~/Documents/Projects/git/CIS61-STk/Chapter1/assign1_p4.scm")
+okay
+STk> (palindrome? 'cis61)
+#f
+STk> (palindrome? 'racecar)
+#t
+STk> (palindrome? 'apple)
+#f
+STk> (palindrome? 'bob)
+#t
+STk> (transcript-off)

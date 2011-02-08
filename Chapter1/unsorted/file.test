@@ -1,0 +1,11 @@
+okay
+STk> (define temp '(1 3 2))
+temp
+STk> temp
+
+(1 3 2)
+STk> (square 5)
+25
+STk> (square (first temp))
+1
+STk> (transcript-off)

@@ -1,0 +1,10 @@
+okay
+STk> (load "~/Documents/Projects/git/CIS61-STk/Chapter1/assign1_p1.scm")
+okay
+STk> (cubert 9)
+2.08008382323852
+STk> (cubert 16)
+2.5198420997977
+STk> (cubert 27)
+3.00000054106418
+STk> (transcript-off)

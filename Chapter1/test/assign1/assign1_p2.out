@@ -1,0 +1,22 @@
+;; Problem 2:
+What is (first (butfirst ''''quote))? Why?
+
+The expression is evaluated as:
+STk> (first (bf ''''quote))
+(quote (quote quote))
+
+Quote is used to evaluate the argument as a literal term. 
+Quote (or ') is required to use the word "quote" in your expression without the interpreter evaluating it, 
+like using quotation marks around a word or phrase to translate their literal meaning.
+
+''''quote returns:
+(quote (quote (quote (quote quote))))
+
+(bf ''''quote) will return:
+((quote (quote quote)))
+Which is all but the first (quote) in the prior expression.
+
+Therefore, the result of the problem expression:
+(quote (quote quote))
+is the result of pulling the first item from the list of nested quotes.
+

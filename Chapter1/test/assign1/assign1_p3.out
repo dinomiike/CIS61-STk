@@ -1,0 +1,12 @@
+okay
+STk> (load "~/Documents/Projects/git/CIS61-STk/Chapter1/assign1_p3.scm")
+okay
+STk> (query '(you are experienced))
+(are you experienced ?)
+STk> (query '(i should have known better))
+(should i have known better ?)
+STk> (query '(you))
+(you ?)
+STk> (query '(i am))
+(am i ?)
+STk> (transcript-off)

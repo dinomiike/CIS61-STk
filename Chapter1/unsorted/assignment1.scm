@@ -139,3 +139,19 @@ __________________
   1    (define series (series (quote (6))))
 STk> series
 (1 2 3 4 5)
+
+
+;;================================================
+
+(define (palindrome? w)
+	(if (> (count w) 1)
+		(if (equal? (first w) (last w))
+			(palindrome? (bl (bf w)))
+			#f
+		)
+		#t
+	)
+)
+
+
+
