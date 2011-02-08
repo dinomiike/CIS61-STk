@@ -1,0 +1,14 @@
+okay
+STk> (load "~/Documents/projects/CIS61-STk/Chapter1/lab2/lab2_1.scm")
+okay
+STk> (lab 'a 'apple)
+1
+STk> (lab 'p 'apple)
+2
+STk> (lab 'apple '(apple is my favorite fruit. i want an apple right now))
+2
+STk> (lab 'f 'godzilla)
+0
+STk> (lab 'almond '(i like dinosaurs))
+0
+STk> (transcript-off)
