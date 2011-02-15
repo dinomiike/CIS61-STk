@@ -1,0 +1,12 @@
+okay
+STk> (load "~/Documents/projects/CIS61-STk/Chapter1/assign2/p2.scm")
+okay
+STk> (p2 'p 'apple)
+2
+STk> (p2 's '(sally sold seashells by the seashore))
+7
+STk> (p2 'o '(The quick brown fox jumped over the lazy black dog))
+4
+STk> (p2 's '(One Mississippi Two Mississippi Three Mississippi))
+12
+STk> (transcript-off)

@@ -1,0 +1,14 @@
+okay
+STk> (load "~/Documents/projects/CIS61-STk/Chapter1/assign2/p1.scm")
+okay
+STk> (square 7)
+49
+STk> (every square '(1 2 3 4))
+(1 4 9 16)
+STk> (every3 square '(1 2 3 4))
+(1 4 9 16)
+STk> (every first '(have a nice day))
+(h a n d)
+STk> (every3 first '(have a nice day))
+(h a n d)
+STk> (transcript-off)

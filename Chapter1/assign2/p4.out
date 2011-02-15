@@ -1,0 +1,28 @@
+Suppose we define the procedure
+
+(define (f g)
+	(g 2))
+
+Then we have
+
+(f square)
+
+Where square is
+
+(define (square n) (* n n))
+
+(f square)
+=>4
+
+(f (lambda (z) (* z (+ z 1))))
+=> (* 2 (+ 2 1))
+=> (* 2 (3))
+=> 6
+
+What happens if we (perversely) ask the interpreter to evaluate the combination (f f)? Explain.
+
+===========================================================
+
+The procedure f takes a procedure and applies it to the number 2. If the procedure can't do anything with 2, it results in an error.
+You might think it would loop infinitely, but since (f 2) doesn't do anything itself, it cannot successfuly recurse itself, so you 
+will see an error stating bad function. (I cheated and ran the function through the interpreter...)
