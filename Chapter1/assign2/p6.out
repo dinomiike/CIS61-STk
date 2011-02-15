@@ -1,0 +1,8 @@
+okay
+STk> (load "~/Documents/projects/CIS61-STk/Chapter1/assign2/p6.scm")
+okay
+STk> ((double inc) 0)
+2
+STk> (((double (double double)) inc) 5)
+21
+STk> (transcript-off)
