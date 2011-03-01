@@ -1,0 +1,10 @@
+okay
+STk> (load "~/Documents/projects/CIS61-STk/Chapter1/lab3/p3.scm")
+okay
+STk> ((compose sqrt abs) -25)
+5
+STk> (define second (compose first bf))
+second
+STk> (second '(higher order function))
+order
+STk> (transcript-off)

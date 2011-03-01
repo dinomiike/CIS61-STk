@@ -1,0 +1,67 @@
+(define (inc arg)
+	(+ arg 1))
+(define (dec arg)
+	(- arg 1))
+
+(define (+ a b)
+	(if (= a 0)
+	    b
+	    (inc (+ (dec a) b))))
+> (+ 4 5)
+
+(if (= 4 0)
+    (inc (+ (dec 4) 5)))
+
+Then...
+
+(inc (+ 3 5))
+(inc (inc (+ 2 5)))
+(inc (inc (inc (+ 1 5))))
+(inc (inc (inc (inc 5))))
+(inc (inc (inc 6)))
+(inc (inc 7))
+(inc 8)
+9
+
+However, for every ending branch of the redefined + process, you will perform the same block loop.
+ie. (Line 3 of the block above really means)
+
+(+ 1 5)
+=> (+ 0 5) => 5 (the b value)
+You're left with (inc 5), which is:
+(+ 5 1)
+(inc (+ 4 1))
+(inc (inc (+ 3 1)))
+(inc (inc (inc (+ 2 1))))
+(inc (inc (inc (inc (+ 1 1))))
+(inc (inc (inc (inc (inc 1)))))
+
+Which eventually boils down to 6.
+
+The process of incrementing the expression is deferred until the 0 condition is reached by the + procedure. Then the process contracts as it increments the values. This is the definition of a recursive process.
+
+;;============================================================================
+
+The second procedure for + is defined as follows:
+(define (+ a b)
+	(if (= a 0)
+	    b
+	    (+ (dec a) (inc b))))
+
+> (+ 4 5)
+(if (= 4 0)
+    (+ (dec 4) (inc 5)))
+
+...Which means
+
+(+ (dec 4) (inc 5))
+(+ 3 6)
+(+ (dec 3) (inc 6))
+(+ 2 7)
+(+ (dec 2) (inc 7))
+(+ 1 8)
+(+ (dec 1) (inc 8)
+(+ 0 9)
+9
+
+In this case, the dec and inc procedures are run as they are encountered. The rules applied to change the variables are fixed. The process doesn't expand or contract. This is the definition of an interative process.

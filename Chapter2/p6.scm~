@@ -1,0 +1,5 @@
+(define (praise flavors)
+  (if (null? flavors)
+      '()
+      (cons (se (car flavors) '(is delicious))
+	    (praise (cdr flavors)))))

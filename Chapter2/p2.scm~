@@ -1,0 +1,4 @@
+(define (ordered? sent)
+  (if (= (count sent) 1) #t
+      ((if (< (first sent) (first (bf sent))) (if (> (count sent) 0) (ordered? (bf sent)) #f)
+      #f))))

@@ -1,0 +1,13 @@
+okay
+STk> (load "~/Documents/projects/CIS61-STk/Chapter1/assign2/p5.scm")
+okay
+STk> (cube 5)
+125
+STk> (square 5)
+25
+STk> (newtons-method (cubic 0.1 -2.2 5.9) 1)
+-2.2472542280837
+STk> 
+()
+()
+STk> (transcript-off)

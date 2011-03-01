@@ -8,3 +8,5 @@
 (define (double f)
   (lambda (x) (f (f x))))
 
+(define (inc arg)
+  (+ arg 1))

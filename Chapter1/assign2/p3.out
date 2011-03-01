@@ -1,0 +1,12 @@
+okay
+STk> (load "~/Documents/projects/CIS61-STk/Chapter1/assign2/p3.scm")
+okay
+STk> (integral cube 0 1 0.01)
+0.2499875
+STk> (simpsons-rule cube 0 1 100.0)
+0.25
+STk> (integral cube 0 1 0.001)
+0.249999875000001
+STk> (simpsons-rule cube 0 1 1000.0)
+0.25
+STk> (transcript-off)
