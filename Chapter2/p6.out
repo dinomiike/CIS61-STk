@@ -1,0 +1,8 @@
+okay
+STk> (load "~/Documents/projects/CIS61-STk/Chapter2/p6.scm")
+okay
+STk> (substitute '((lead guitar) (bass guitar) (rhythm guitar) drums) 'guitar 'axe)
+((lead axe) (bass axe) (rhythm axe) drums)
+STk> (substitute '(((lead guitar) first guitar (second guitar)) (bass guitar) (rhythm guitar) drums) 'guitar 'axe)
+(((lead axe) first axe (second axe)) (bass axe) (rhythm axe) drums)
+STk> (transcript-off)

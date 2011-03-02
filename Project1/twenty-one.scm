@@ -41,12 +41,39 @@
     	(move-card deck '() (random size)) ))
   (shuffle (make-ordered-deck) 52) )
 
-;;(define (best-total hand)
-;;  (let ((prelim-value ((if (> (count card) 2) (word (first card) (first (bf card)))
-;;	(word (first card))))
-;;  (every add-up hand))
+;;===============================================================
 
 (define (best-total hand)
-  (define (fx card)
-    (if (> (count card) 2) (+ (first card) 
-  (accumulate fx hand))
+  (define (strip card)
+    (if (> (count card) 2) 10
+	(if (equal? (first card) 'a) 0
+	    (first card))))
+  (define (new-strip card)
+    (cond ((> (count card) 2) 10)
+	  ((equal? (first card) 'a) 0)
+	  ((or (equal? (first card) 'k) (equal? (first card) 'q) (equal? (first card) 'j)) 10)
+	  (else (first card))))
+  (define (is-ace? card)
+    (if (equal? (first card) 'a) #t #f))
+  (define (widdle value aces)
+    (cond ((= aces 0) value)
+	  (else (if (<= (+ value 11) 21) (widdle (+ value 11) (- aces 1))
+		    (widdle (+ value 1) (- aces 1))))))
+  (define (eval-aces value aces)
+    (cond ((= aces 4) (if (> (+ value 14) 21) (+ value 4)
+			  (+ value 14)))
+	  ((= aces 3) (if (> (+ value 13) 21) (+ value 3)
+			  (+ value 13)))
+	  ((= aces 2) (if (> (+ value 12) 21) (+ value 2)
+			  (+ value 12)))
+	  ((= aces 1) (if (> (+ value 11) 21) (+ value 1)
+			  (+ value 11)))))
+  (let ((aces (count (keep is-ace? hand)))
+	(prelim-value (accumulate + (every new-strip hand))))
+    (if (> aces 0) (eval-aces prelim-value aces)
+	prelim-value)))
+
+;;=================================================================
+
+(define (stop-at-17 customer-hand-so-far dealer-up-card)
+  (if (< (best-total hand) 17) #t #f))

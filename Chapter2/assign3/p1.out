@@ -1,0 +1,8 @@
+okay
+STk> (switch '(i my me))
+(you my you)
+STk> (switch '(you he me))
+(i he you)
+STk> (switch '(you told me that i should wake you up))
+(i told you that you should wake me up)
+STk> (transcript-off)

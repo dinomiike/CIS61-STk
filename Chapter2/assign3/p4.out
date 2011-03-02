@@ -1,0 +1,12 @@
+okay
+STk> (load "~/Documents/projects/CIS61-STk/Chapter2/p4.scm")
+okay
+STk> (ends-e '(the quick brown fox jumped over the lazy black dog))
+(the the)
+STk> (ends-e '(everyone eats pine needles once))
+(everyone pine once)
+STk> (ends-e '(i want to eat a pear))
+()
+STk> (ends-e '(please put the salami above the blue elephant))
+(please the above the blue)
+STk> (transcript-off)

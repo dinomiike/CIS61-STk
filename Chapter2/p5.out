@@ -1,0 +1,28 @@
+okay
+STk> (load "~/Documents/projects/CIS61-STk/Chapter2/p5.scm")
+okay
+STk> (define x (make-rat-new 1 2))
+x
+STk> (print-rat x)
+
+1/2
+okay
+STk> (define x (make-rat-new -1 -2))
+x
+STk> (print-rat x)
+
+1/2
+okay
+STk> (define x (make-rat-new 1 -2))
+x
+STk> (print-rat x)
+
+-1/2
+okay
+STk> (define x (make-rat-new -1 2))
+x
+STk> (print-rat x)
+
+-1/2
+okay
+STk> (transcript-off)

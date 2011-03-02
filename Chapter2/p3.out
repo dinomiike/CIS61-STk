@@ -1,0 +1,10 @@
+okay
+STk> (load "~/Documents/projects/CIS61-STK/Chapter2/p3.scm")
+okay
+STk> (next-perf 1)
+6
+STk> (next-perf 7)
+28
+STk> (next-perf 29)
+496
+STk> (transcript-off)

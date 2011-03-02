@@ -1,0 +1,16 @@
+okay
+STk> (ordered? '(1 2 3 4 5))
+#t
+STk> (ordered? '(100 200 500 700))
+#t
+STk> (ordered '(9 19 22 17 25 30))
+*** Error:
+    unbound variable: ordered
+Current eval stack:
+__________________
+  0    (ordered (quote (9 19 22 17 25 30)))
+STk> (ordered? '(9 19 22 17 25 30))
+#f
+STk> (ordered? '(5 4 3 1 5 2 6))
+#f
+STk> (transcript-off)
