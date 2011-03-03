@@ -1,0 +1,100 @@
+okay
+STk> (load "~/Documents/projects/CIS61-STk/Project1/twenty-one.scm")
+okay
+STk> (trace play-x)
+okay
+STk> (trace twenty-one)
+okay
+STk> (play-n stop-at-17 5)
+.. -> play-x with result = 0,  strategy = #[closure arglist=(customer-hand-so-far dealer-up-card) 451420],  x = 5
+.... -> twenty-one with strategy = #[closure arglist=(customer-hand-so-far dealer-up-card) 451420]
+.... <- twenty-one returns 1
+.... -> play-x with result = 1,  strategy = #[closure arglist=(customer-hand-so-far dealer-up-card) 451420],  x = 4
+...... -> twenty-one with strategy = #[closure arglist=(customer-hand-so-far dealer-up-card) 451420]
+...... <- twenty-one returns -1
+...... -> play-x with result = 0,  strategy = #[closure arglist=(customer-hand-so-far dealer-up-card) 451420],  x = 3
+........ -> twenty-one with strategy = #[closure arglist=(customer-hand-so-far dealer-up-card) 451420]
+........ <- twenty-one returns -1
+........ -> play-x with result = -1,  strategy = #[closure arglist=(customer-hand-so-far dealer-up-card) 451420],  x = 2
+.......... -> twenty-one with strategy = #[closure arglist=(customer-hand-so-far dealer-up-card) 451420]
+.......... <- twenty-one returns 1
+.......... -> play-x with result = 0,  strategy = #[closure arglist=(customer-hand-so-far dealer-up-card) 451420],  x = 1
+............ -> twenty-one with strategy = #[closure arglist=(customer-hand-so-far dealer-up-card) 451420]
+............ <- twenty-one returns -1
+............ -> play-x with result = -1,  strategy = #[closure arglist=(customer-hand-so-far dealer-up-card) 451420],  x = 0
+............ <- play-x returns -1
+.......... <- play-x returns -1
+........ <- play-x returns -1
+...... <- play-x returns -1
+.... <- play-x returns -1
+.. <- play-x returns -1
+-1
+STk> (play-n stop-at-17 5)
+.. -> play-x with result = 0,  strategy = #[closure arglist=(customer-hand-so-far dealer-up-card) 451420],  x = 5
+.... -> twenty-one with strategy = #[closure arglist=(customer-hand-so-far dealer-up-card) 451420]
+.... <- twenty-one returns 1
+.... -> play-x with result = 1,  strategy = #[closure arglist=(customer-hand-so-far dealer-up-card) 451420],  x = 4
+...... -> twenty-one with strategy = #[closure arglist=(customer-hand-so-far dealer-up-card) 451420]
+...... <- twenty-one returns 1
+...... -> play-x with result = 2,  strategy = #[closure arglist=(customer-hand-so-far dealer-up-card) 451420],  x = 3
+........ -> twenty-one with strategy = #[closure arglist=(customer-hand-so-far dealer-up-card) 451420]
+........ <- twenty-one returns -1
+........ -> play-x with result = 1,  strategy = #[closure arglist=(customer-hand-so-far dealer-up-card) 451420],  x = 2
+.......... -> twenty-one with strategy = #[closure arglist=(customer-hand-so-far dealer-up-card) 451420]
+.......... <- twenty-one returns -1
+.......... -> play-x with result = 0,  strategy = #[closure arglist=(customer-hand-so-far dealer-up-card) 451420],  x = 1
+............ -> twenty-one with strategy = #[closure arglist=(customer-hand-so-far dealer-up-card) 451420]
+............ <- twenty-one returns -1
+............ -> play-x with result = -1,  strategy = #[closure arglist=(customer-hand-so-far dealer-up-card) 451420],  x = 0
+............ <- play-x returns -1
+.......... <- play-x returns -1
+........ <- play-x returns -1
+...... <- play-x returns -1
+.... <- play-x returns -1
+.. <- play-x returns -1
+-1
+STk> (play-n stop-at-17 10)
+.. -> play-x with result = 0,  strategy = #[closure arglist=(customer-hand-so-far dealer-up-card) 451420],  x = 10
+.... -> twenty-one with strategy = #[closure arglist=(customer-hand-so-far dealer-up-card) 451420]
+.... <- twenty-one returns 1
+.... -> play-x with result = 1,  strategy = #[closure arglist=(customer-hand-so-far dealer-up-card) 451420],  x = 9
+...... -> twenty-one with strategy = #[closure arglist=(customer-hand-so-far dealer-up-card) 451420]
+...... <- twenty-one returns -1
+...... -> play-x with result = 0,  strategy = #[closure arglist=(customer-hand-so-far dealer-up-card) 451420],  x = 8
+........ -> twenty-one with strategy = #[closure arglist=(customer-hand-so-far dealer-up-card) 451420]
+........ <- twenty-one returns -1
+........ -> play-x with result = -1,  strategy = #[closure arglist=(customer-hand-so-far dealer-up-card) 451420],  x = 7
+.......... -> twenty-one with strategy = #[closure arglist=(customer-hand-so-far dealer-up-card) 451420]
+.......... <- twenty-one returns 1
+.......... -> play-x with result = 0,  strategy = #[closure arglist=(customer-hand-so-far dealer-up-card) 451420],  x = 6
+............ -> twenty-one with strategy = #[closure arglist=(customer-hand-so-far dealer-up-card) 451420]
+............ <- twenty-one returns -1
+............ -> play-x with result = -1,  strategy = #[closure arglist=(customer-hand-so-far dealer-up-card) 451420],  x = 5
+.............. -> twenty-one with strategy = #[closure arglist=(customer-hand-so-far dealer-up-card) 451420]
+.............. <- twenty-one returns 1
+.............. -> play-x with result = 0,  strategy = #[closure arglist=(customer-hand-so-far dealer-up-card) 451420],  x = 4
+................ -> twenty-one with strategy = #[closure arglist=(customer-hand-so-far dealer-up-card) 451420]
+................ <- twenty-one returns -1
+................ -> play-x with result = -1,  strategy = #[closure arglist=(customer-hand-so-far dealer-up-card) 451420],  x = 3
+.................. -> twenty-one with strategy = #[closure arglist=(customer-hand-so-far dealer-up-card) 451420]
+.................. <- twenty-one returns 1
+.................. -> play-x with result = 0,  strategy = #[closure arglist=(customer-hand-so-far dealer-up-card) 451420],  x = 2
+.................... -> twenty-one with strategy = #[closure arglist=(customer-hand-so-far dealer-up-card) 451420]
+.................... <- twenty-one returns -1
+.................... -> play-x with result = -1,  strategy = #[closure arglist=(customer-hand-so-far dealer-up-card) 451420],  x = 1
+...................... -> twenty-one with strategy = #[closure arglist=(customer-hand-so-far dealer-up-card) 451420]
+...................... <- twenty-one returns 0
+...................... -> play-x with result = -1,  strategy = #[closure arglist=(customer-hand-so-far dealer-up-card) 451420],  x = 0
+...................... <- play-x returns -1
+.................... <- play-x returns -1
+.................. <- play-x returns -1
+................ <- play-x returns -1
+.............. <- play-x returns -1
+............ <- play-x returns -1
+.......... <- play-x returns -1
+........ <- play-x returns -1
+...... <- play-x returns -1
+.... <- play-x returns -1
+.. <- play-x returns -1
+-1
+STk> (transcript-off)

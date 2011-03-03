@@ -76,4 +76,76 @@
 ;;=================================================================
 
 (define (stop-at-17 customer-hand-so-far dealer-up-card)
-  (if (< (best-total hand) 17) #t #f))
+  (if (< (best-total customer-hand-so-far) 17) #t #f))
+
+;;=================================================================
+
+(define (play-n strategy n)
+  (play-x 0 strategy n))
+
+(define (play-x result strategy x)
+  (if (= x 0) result
+      (play-x (+ result (twenty-one strategy)) strategy (- x 1))))
+
+;;=================================================================
+
+(define (dealer-sensitive customer-hand-so-far dealer-up-card)
+  (if (or
+       (and
+	(or
+	 (equal? dealer-up-card 'a)
+	 (equal? dealer-up-card 7)
+	 (equal? dealer-up-card 8)
+	 (equal? dealer-up-card 9)
+	 (equal? dealer-up-card 10)
+	 (equal? dealer-up-card 'k)
+	 (equal? dealer-up-card 'q)
+	 (equal? dealer-up-card 'j))
+	(< customer-hand-so-far 17))
+       (and
+	(or
+	 (equal? dealer-up-card 2)
+	 (equal? dealer-up-card 3)
+	 (equal? dealer-up-card 4)
+	 (equal? dealer-up-card 5)
+	 (equal? dealer-up-card 6))
+	(< customer-hand-so-far 12) )) #t
+      #f))
+
+;;=================================================================
+
+(define (stop-at n)
+  (lambda (customer-hand-so-far dealer-up-card) (if (< (best-total customer-hand-so-far) n) #t #f)))
+
+;;=================================================================
+
+(define (valentine customer-hand-so-far dealer-up-card)
+  (if (member? 'h (every bf customer-hand-so-far)) (if (< (best-total customer-hand-so-far) 19) #t
+						       #f)
+      (if (< (best-total customer-hand-so-far) 17) #t
+	  #f)))
+
+;;=================================================================
+
+(define (on-suit suit customer-hand-so-far dealer-up-card)
+  (if (member? suit (every bf customer-hand-so-far)) (if (< (best-total customer-hand-so-far) 19) #t
+							 #f)
+      (if (< (best-total customer-hand-so-far) 17) #t
+	  #f)))
+
+;;=================================================================
+
+(define (suit-strategy suit strategy1 strategy2)
+  (lambda (customer-hand-so-far dealer-up-card) (if (on-suit suit customer-hand-so-far dealer-up-card) (strategy1 customer-hand-so-far dealer-up-card)
+						    (strategy2 customer-hand-so-far dealer-up-card))))
+
+;;=================================================================
+
+(define (majority strategy1 strategy2 strategy3)
+  (lambda (customer-hand-so-far dealer-up-card) (if (>= (+ (if (strategy1 customer-hand-so-far dealer-up-card) 1 0)
+							   (if (strategy2 customer-hand-so-far dealer-up-card) 1 0)
+							   (if (strategy3 customer-hand-so-far dealer-up-card) 1 0)) 2) #t
+							   #f)))
+
+;;=================================================================
+
