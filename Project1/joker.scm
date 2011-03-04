@@ -25,10 +25,11 @@
 		   (first (bf (bf deck)))
 		   (bf (bf (bf deck))))) )
 
+;; O = Joker
 (define (make-ordered-deck)
   (define (make-suit s)
     (every (lambda (rank) (word rank s)) '(A 2 3 4 5 6 7 8 9 10 J Q K)) )
-  (se (make-suit 'H) (make-suit 'S) (make-suit 'D) (make-suit 'C)) )
+  (se (make-suit 'H) (make-suit 'S) (make-suit 'D) (make-suit 'C) 'O 'O) )
 
 (define (make-deck)
   (define (shuffle deck size)
@@ -39,39 +40,37 @@
     (if (= size 0)
 	deck
     	(move-card deck '() (random size)) ))
-  (shuffle (make-ordered-deck) 52) )
+  (shuffle (make-ordered-deck) 54) )
 
 ;;===============================================================
 
 (define (best-total hand)
-  (define (strip card)
-    (if (> (count card) 2) 10
-	(if (equal? (first card) 'a) 0
-	    (first card))))
   (define (new-strip card)
     (cond ((> (count card) 2) 10)
 	  ((equal? (first card) 'a) 0)
+	  ((equal? (first card) 'o) 0)
 	  ((or (equal? (first card) 'k) (equal? (first card) 'q) (equal? (first card) 'j)) 10)
 	  (else (first card))))
   (define (is-ace? card)
     (if (equal? (first card) 'a) #t #f))
-  (define (widdle value aces)
-    (cond ((= aces 0) value)
-	  (else (if (<= (+ value 11) 21) (widdle (+ value 11) (- aces 1))
-		    (widdle (+ value 1) (- aces 1))))))
-  (define (eval-aces value aces)
-    (cond ((= aces 4) (if (> (+ value 14) 21) (+ value 4)
+  (define (eval-aces value aces jokers)
+    (cond ((= aces 4) (if (> (+ value 14 jokers) 21) (+ value 4)
 			  (+ value 14)))
-	  ((= aces 3) (if (> (+ value 13) 21) (+ value 3)
+	  ((= aces 3) (if (> (+ value 13) 21 jokers) (+ value 3)
 			  (+ value 13)))
-	  ((= aces 2) (if (> (+ value 12) 21) (+ value 2)
+	  ((= aces 2) (if (> (+ value 12) 21 jokers) (+ value 2)
 			  (+ value 12)))
-	  ((= aces 1) (if (> (+ value 11) 21) (+ value 1)
-			  (+ value 11)))))
+	  ((= aces 1) (if (> (+ value 11) 21 jokers) (+ value 1)
+			  (+ value 11)))
+	  ((= aces 0) value)))
+  (define (eval-jokers value jokers)
+    (cond ((= jokers 2) 21)
+	  ((= jokers 1) (if (<= (- 21 value) 11) (+ (- 21 value) value)
+			    (+ value 11)))
+	  ((= jokers 0) value)))
   (let ((aces (count (keep is-ace? hand)))
-	(prelim-value (accumulate + (every new-strip hand))))
-    (if (> aces 0) (eval-aces prelim-value aces)
-	prelim-value)))
+	(jokers (appearances 'O hand)))
+    (eval-jokers (eval-aces (accumulate + (every new-strip hand)) aces jokers) jokers)))
 
 ;;=================================================================
 

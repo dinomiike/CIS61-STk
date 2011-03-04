@@ -1,3 +1,0 @@
-(define (filter w)
-  (cond ((equal? w 'i) 'you)
-	((equal? w 'me) 'you)))

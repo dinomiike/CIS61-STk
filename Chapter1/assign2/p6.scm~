@@ -1,2 +1,0 @@
-(define (inc arg)
-  1)
