@@ -1,0 +1,19 @@
+okay
+STk> (load "~/Documents/Projects/lisp/CIS61-STk/Project1/twenty-one.scm")
+okay
+STk> best-total
+
+#[closure arglist=(hand) 57fc80]
+STk> (best-total '("ad" "8s"))
+19
+STk> (best-total '("ad" "as" "9h"))
+21
+STk> (make-deck)
+("10h" "6h" "8h" jc ad "10c" "7c" "4h" qc "3d" "8s" as "2c" qd "4d" "10s" kc "2h" "4c" "9c" jh "6c" "6d" "2s" "3h" "10d" "3s" "4s" "6s" "7h" "5d" "8c" "9h" "8d" "7d" ah "7s" "3c" qh jd js kh ks "2d" "5s" ac kd qs "9s" "5c" "9d" "5h")
+STk> (best-total '("jc" "ad" "7c"))
+18
+STk> (best-total '("6c" "kh" "as"))
+17
+STk> (best-total '("3d" "5c" "kh" "ac"))
+19
+STk> (transcript-off)

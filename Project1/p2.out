@@ -1,0 +1,10 @@
+okay
+STk> (stop-at-17 '("5h" "3c") "jh")
+#t
+STk> (stop-at-17 '("5h" "3c" "qd") "jh")
+#f
+STk> (stop-at-17 '("10h" "6c") "jh")
+#t
+STk> (stop-at-17 '("10h" "6c" "as") "jh")
+#f
+STk> (transcript-off)
