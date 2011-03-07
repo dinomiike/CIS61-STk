@@ -105,7 +105,7 @@
 	  (member? 8 dealer-up-card)
 	  (member? 9 dealer-up-card)
 	  ;; 10 is a weird case where it doesn't like to compare a 2-digit number or word to a word, so you have to strip the dealer card of suit and turn it into a sentence if it's not already
-	  (member? 10 (se (new-strip dealer-up-card)))
+	  (member? 10 (every new-strip dealer-up-card))
 	  (member? 'k dealer-up-card)
 	  (member? 'q dealer-up-card)
 	  (member? 'j dealer-up-card)) #t
@@ -167,8 +167,8 @@
 ;;=================================================================
 
 ;; If the strategy provided applied to the current hand returns false then check if that strategy applied to the but-last of the current hand is also false.
-;; If that the bl of the current hand returns false as well, you should have stopped there but recklessly drew another card. Thus that hand is a reckless hand. Return false. No need to be stupid.
-;; If it's true, then you know you should have gone for the next card according to the original strategy, and you were not reckless to hit again.
+;; If the bl of the current hand returns false as well, you should have stopped there but recklessly drew another card. Thus that hand is a reckless hand. Return false. No need to be stupid.
+;; If it's true, then you know you should have gone for the next card according to the original strategy, and you were not reckless to hit again. So return true to hit again.
 ;; Finally, if the strategy provided on the current hand returned true in the first place, then obviously just hit again.
 
 (define (reckless strategy)

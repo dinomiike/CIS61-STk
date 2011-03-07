@@ -1,0 +1,44 @@
+okay
+STk> (twenty-one (reckless stop-at-17))
+.. -> reckless with strategy = #[closure arglist=l 7900c0]
+.. <- reckless returns #[closure arglist=(customer-hand-so-far dealer-up-card) 796af0]
+.. -> twenty-one with strategy = #[closure arglist=(customer-hand-so-far dealer-up-card) 796af0]
+.... -> stop-at-17 with customer-hand-so-far = ("3s" "5c"),  dealer-up-card = "9d"
+.... <- stop-at-17 returns #t
+.... -> stop-at-17 with customer-hand-so-far = ("3s" "5c" "9h"),  dealer-up-card = "9d"
+.... <- stop-at-17 returns #f
+.... -> stop-at-17 with customer-hand-so-far = ("3s" "5c"),  dealer-up-card = "9d"
+.... <- stop-at-17 returns #t
+.... -> stop-at-17 with customer-hand-so-far = ("3s" "5c" "9h" "4s"),  dealer-up-card = "9d"
+.... <- stop-at-17 returns #f
+.... -> stop-at-17 with customer-hand-so-far = ("3s" "5c" "9h"),  dealer-up-card = "9d"
+.... <- stop-at-17 returns #f
+.. <- twenty-one returns 1
+1
+STk> (twenty-one (reckless stop-at-17))
+.. -> reckless with strategy = #[closure arglist=l 7900c0]
+.. <- reckless returns #[closure arglist=(customer-hand-so-far dealer-up-card) 79cbe0]
+.. -> twenty-one with strategy = #[closure arglist=(customer-hand-so-far dealer-up-card) 79cbe0]
+.... -> stop-at-17 with customer-hand-so-far = (ac "10h"),  dealer-up-card = "6s"
+.... <- stop-at-17 returns #f
+.... -> stop-at-17 with customer-hand-so-far = (ac),  dealer-up-card = "6s"
+.... <- stop-at-17 returns #t
+.... -> stop-at-17 with customer-hand-so-far = (ac "10h" "10s"),  dealer-up-card = "6s"
+.... <- stop-at-17 returns #f
+.... -> stop-at-17 with customer-hand-so-far = (ac "10h"),  dealer-up-card = "6s"
+.... <- stop-at-17 returns #f
+.. <- twenty-one returns 1
+1
+STk> (twenty-one (reckless stop-at-17))
+.. -> reckless with strategy = #[closure arglist=l 7900c0]
+.. <- reckless returns #[closure arglist=(customer-hand-so-far dealer-up-card) 75f510]
+.. -> twenty-one with strategy = #[closure arglist=(customer-hand-so-far dealer-up-card) 75f510]
+.... -> stop-at-17 with customer-hand-so-far = ("3c" "9c"),  dealer-up-card = "4h"
+.... <- stop-at-17 returns #t
+.... -> stop-at-17 with customer-hand-so-far = ("3c" "9c" "8s"),  dealer-up-card = "4h"
+.... <- stop-at-17 returns #f
+.... -> stop-at-17 with customer-hand-so-far = ("3c" "9c"),  dealer-up-card = "4h"
+.... <- stop-at-17 returns #t
+.. <- twenty-one returns -1
+-1
+STk> (transcript-off)

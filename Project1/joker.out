@@ -1,0 +1,56 @@
+okay
+STk> (best-total '("3d" "kc"))
+.. -> best-total with hand = ("3d" "kc")
+.. <- best-total returns 13
+13
+STk> (best-total '("8s" "qc" "ad"))
+.. -> best-total with hand = ("8s" "qc" "ad")
+.. <- best-total returns 19
+19
+STk> (best-total '("8s" "qc" "ad" "O"))
+.. -> best-total with hand = ("8s" "qc" "ad" "O")
+.. <- best-total returns 21
+21
+STk> (best-total '("O" "5h"))
+.. -> best-total with hand = ("O" "5h")
+.. <- best-total returns 16
+16
+STk> (best-total '("O" "5h" "0"))
+.. -> best-total with hand = ("O" "5h" "0")
+.. <- best-total returns 16
+16
+STk> (best-total '("O" "5h" "O"))
+.. -> best-total with hand = ("O" "5h" "O")
+.. <- best-total returns 21
+21
+STk> (twenty-one stop-at-17)
+.. -> twenty-one with strategy = #[closure arglist=(customer-hand-so-far dealer-up-card) 77e240]
+.... -> best-total with hand = ("5c" "3d")
+.... <- best-total returns 8
+.... -> best-total with hand = ("5c" "3d")
+.... <- best-total returns 8
+.... -> best-total with hand = ("5c" "3d" js)
+.... <- best-total returns 18
+.... -> best-total with hand = ("5c" "3d" js)
+.... <- best-total returns 18
+.... -> best-total with hand = (o qd)
+.... <- best-total returns 21
+.... -> best-total with hand = (o qd)
+.... <- best-total returns 21
+.... -> best-total with hand = ("5c" "3d" js)
+.... <- best-total returns 18
+.... -> best-total with hand = (o qd)
+.... <- best-total returns 21
+.. <- twenty-one returns -1
+-1
+STk> (twenty-one stop-at-17)
+.. -> twenty-one with strategy = #[closure arglist=(customer-hand-so-far dealer-up-card) 77e240]
+.... -> best-total with hand = ("5d" "9s")
+.... <- best-total returns 14
+.... -> best-total with hand = ("5d" "9s")
+.... <- best-total returns 14
+.... -> best-total with hand = ("5d" "9s" "9c")
+.... <- best-total returns 23
+.. <- twenty-one returns -1
+-1
+STk> (transcript-off)

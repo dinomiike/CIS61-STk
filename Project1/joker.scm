@@ -88,28 +88,38 @@
 
 ;;=================================================================
 
+(define (new-strip card)
+  (cond ((> (count card) 2) 10)
+	((equal? (first card) 'a) 0)
+	((or (equal? (first card) 'k) (equal? (first card) 'q) (equal? (first card) 'j)) 10)
+	(else (first card))))
+
+;;=================================================================
+
 (define (dealer-sensitive customer-hand-so-far dealer-up-card)
+  (define (dealer-cond1? dealer-up-card)
+    (if (or
+	 (member? 'a dealer-up-card)
+	 (member? 7 dealer-up-card)
+	 (member? 8 dealer-up-card)
+	 (member? 9 dealer-up-card)
+	 (member? 10 (every new-strip dealer-up-card))
+	 (member? 'k dealer-up-card)
+	 (member? 'q dealer-up-card)
+	 (member? 'j dealer-up-card)) #t
+	 #f))
+  (define (dealer-cond2? dealer-up-card)
+    (if (or
+	 (member? 2 dealer-up-card)
+	 (member? 3 dealer-up-card)
+	 (member? 4 dealer-up-card)
+	 (member? 5 dealer-up-card)
+	 (member? 6 dealer-up-card)) #t
+	 #f))
   (if (or
-       (and
-	(or
-	 (equal? dealer-up-card 'a)
-	 (equal? dealer-up-card 7)
-	 (equal? dealer-up-card 8)
-	 (equal? dealer-up-card 9)
-	 (equal? dealer-up-card 10)
-	 (equal? dealer-up-card 'k)
-	 (equal? dealer-up-card 'q)
-	 (equal? dealer-up-card 'j))
-	(< customer-hand-so-far 17))
-       (and
-	(or
-	 (equal? dealer-up-card 2)
-	 (equal? dealer-up-card 3)
-	 (equal? dealer-up-card 4)
-	 (equal? dealer-up-card 5)
-	 (equal? dealer-up-card 6))
-	(< customer-hand-so-far 12) )) #t
-      #f))
+       (and (dealer-cond1? dealer-up-card) (< (best-total customer-hand-so-far) 17))
+       (and (dealer-cond2? dealer-up-card) (< (best-total customer-hand-so-far) 12))) #t
+       #f))
 
 ;;=================================================================
 
