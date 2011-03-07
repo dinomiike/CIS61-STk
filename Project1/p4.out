@@ -1,0 +1,38 @@
+okay
+STk> (load "~/Documents/projects/CIS61-STk/Project1/twenty-one.scm")
+okay
+STk> (dealer-sensitive '("kh" "2s") "ad")
+#t
+STk> (dealer-sensitive '("kh" "2s") "6c")
+#f
+STk> (dealer-sensitive '("8d" "6s" "4h") "jd")
+#f
+STk> (dealer-sensitive '("8d" "6s" "4h") "6d")
+#f
+STk> (dealer-sensitive '("8d" "6s" "4h") "10d")
+#f
+STk> (dealer-sensitive '("6s" "4h") "2d")
+#t
+STk> (dealer-sensitive '("6s" "4h") "jd")
+#t
+STk> (dealer-sensitive '("6s" "4h") "jd")
+#t
+STk> (trace dealer-sensitive)
+okay
+STk> (make-deck)
+(kd "3h" "6c" "8c" "5c" "2d" ad as qc "4d" "10s" ac "10c" "2s" "2c" qh kc jc "7c" "4s" "10h" js "3s" qs "4c" "3c" "5h" "7h" "6d" "4h" jd "5s" "8d" "6h" jh "9c" "3d" "8s" "9h" "10d" ks "6s" "7d" "2h" qd "8h" ah "9d" "5d" kh "9s" "7s")
+STk> (dealer-sensitive '("kd" "3h") "6c")
+.. -> dealer-sensitive with customer-hand-so-far = ("kd" "3h"),  dealer-up-card = "6c"
+.. <- dealer-sensitive returns #f
+#f
+STk> (make-deck)
+(ad "10s" ac "9s" kc "10h" "6s" "5h" qc "6d" "5d" "3c" "7h" "8d" jc "10c" "7s" qh "3h" "9h" "7d" "8c" "8h" kd "2c" "4h" "4c" qd "5s" "5c" jh "6c" "9c" js "2h" "8s" "7c" "3d" qs ks "2s" "2d" "6h" as ah "3s" "10d" "4d" "4s" kh jd "9d")
+STk> (dealer-sensitive '("js" "2h" "5h") "jd")
+.. -> dealer-sensitive with customer-hand-so-far = ("js" "2h" "5h"),  dealer-up-card = "jd"
+.. <- dealer-sensitive returns #f
+#f
+STk> (dealer-sensitive '("js" "2h") "jd")
+.. -> dealer-sensitive with customer-hand-so-far = ("js" "2h"),  dealer-up-card = "jd"
+.. <- dealer-sensitive returns #t
+#t
+STk> (transcript-off)

@@ -1,0 +1,86 @@
+okay
+STk> (twenty-one (suit-strategy 'd (stop-at 19) (stop-at 16)))
+.. -> stop-at with n = 19
+.. <- stop-at returns #[closure arglist=(customer-hand-so-far dealer-up-card) 45ba80]
+.. -> stop-at with n = 16
+.. <- stop-at returns #[closure arglist=(customer-hand-so-far dealer-up-card) 45b060]
+.. -> suit-strategy with suit = d,  strategy1 = #[closure arglist=(customer-hand-so-far dealer-up-card) 45ba80],  strategy2 = #[closure arglist=(customer-hand-so-far dealer-up-card) 45b060]
+.. <- suit-strategy returns #[closure arglist=(customer-hand-so-far dealer-up-card) 45a4f0]
+.. -> check-for-suit with suit = d,  customer-hand-so-far = ("8d" qd)
+.. <- check-for-suit returns #t
+-1
+STk> (twenty-one (suit-strategy 'd (stop-at 19) (stop-at 16)))
+.. -> stop-at with n = 19
+.. <- stop-at returns #[closure arglist=(customer-hand-so-far dealer-up-card) 29af70]
+.. -> stop-at with n = 16
+.. <- stop-at returns #[closure arglist=(customer-hand-so-far dealer-up-card) 2995c0]
+.. -> suit-strategy with suit = d,  strategy1 = #[closure arglist=(customer-hand-so-far dealer-up-card) 29af70],  strategy2 = #[closure arglist=(customer-hand-so-far dealer-up-card) 2995c0]
+.. <- suit-strategy returns #[closure arglist=(customer-hand-so-far dealer-up-card) 292030]
+.. -> check-for-suit with suit = d,  customer-hand-so-far = ("5h" "6c")
+.. <- check-for-suit returns #f
+.. -> check-for-suit with suit = d,  customer-hand-so-far = ("5h" "6c" "2d")
+.. <- check-for-suit returns #t
+.. -> check-for-suit with suit = d,  customer-hand-so-far = ("5h" "6c" "2d" "3h")
+.. <- check-for-suit returns #t
+.. -> check-for-suit with suit = d,  customer-hand-so-far = ("5h" "6c" "2d" "3h" "2s")
+.. <- check-for-suit returns #t
+-1
+STk> (twenty-one (suit-strategy 'd (stop-at 19) (stop-at 16)))
+.. -> stop-at with n = 19
+.. <- stop-at returns #[closure arglist=(customer-hand-so-far dealer-up-card) 2dc030]
+.. -> stop-at with n = 16
+.. <- stop-at returns #[closure arglist=(customer-hand-so-far dealer-up-card) 2da400]
+.. -> suit-strategy with suit = d,  strategy1 = #[closure arglist=(customer-hand-so-far dealer-up-card) 2dc030],  strategy2 = #[closure arglist=(customer-hand-so-far dealer-up-card) 2da400]
+.. <- suit-strategy returns #[closure arglist=(customer-hand-so-far dealer-up-card) 2d9210]
+.. -> check-for-suit with suit = d,  customer-hand-so-far = ("2d" "6d")
+.. <- check-for-suit returns #t
+.. -> check-for-suit with suit = d,  customer-hand-so-far = ("2d" "6d" "7s")
+.. <- check-for-suit returns #t
+.. -> check-for-suit with suit = d,  customer-hand-so-far = ("2d" "6d" "7s" "6h")
+.. <- check-for-suit returns #t
+1
+STk> (twenty-one (suit-strategy 'd (stop-at 19) (stop-at 16)))
+.. -> stop-at with n = 19
+.. <- stop-at returns #[closure arglist=(customer-hand-so-far dealer-up-card) 2d1fd0]
+.. -> stop-at with n = 16
+.. <- stop-at returns #[closure arglist=(customer-hand-so-far dealer-up-card) 2cc430]
+.. -> suit-strategy with suit = d,  strategy1 = #[closure arglist=(customer-hand-so-far dealer-up-card) 2d1fd0],  strategy2 = #[closure arglist=(customer-hand-so-far dealer-up-card) 2cc430]
+.. <- suit-strategy returns #[closure arglist=(customer-hand-so-far dealer-up-card) 2ca370]
+.. -> check-for-suit with suit = d,  customer-hand-so-far = (qd "10s")
+.. <- check-for-suit returns #t
+1
+STk> (twenty-one (suit-strategy 'd (stop-at 19) (stop-at 16)))
+.. -> stop-at with n = 19
+.. <- stop-at returns #[closure arglist=(customer-hand-so-far dealer-up-card) 4608e0]
+.. -> stop-at with n = 16
+.. <- stop-at returns #[closure arglist=(customer-hand-so-far dealer-up-card) 45ffa0]
+.. -> suit-strategy with suit = d,  strategy1 = #[closure arglist=(customer-hand-so-far dealer-up-card) 4608e0],  strategy2 = #[closure arglist=(customer-hand-so-far dealer-up-card) 45ffa0]
+.. <- suit-strategy returns #[closure arglist=(customer-hand-so-far dealer-up-card) 45f500]
+.. -> check-for-suit with suit = d,  customer-hand-so-far = ("4d" ah)
+.. <- check-for-suit returns #t
+.. -> check-for-suit with suit = d,  customer-hand-so-far = ("4d" ah jh)
+.. <- check-for-suit returns #t
+.. -> check-for-suit with suit = d,  customer-hand-so-far = ("4d" ah jh "4c")
+.. <- check-for-suit returns #t
+0
+STk> (twenty-one (suit-strategy 'd (stop-at 19) (stop-at 16)))
+.. -> stop-at with n = 19
+.. <- stop-at returns #[closure arglist=(customer-hand-so-far dealer-up-card) 2c76f0]
+.. -> stop-at with n = 16
+.. <- stop-at returns #[closure arglist=(customer-hand-so-far dealer-up-card) 2c64e0]
+.. -> suit-strategy with suit = d,  strategy1 = #[closure arglist=(customer-hand-so-far dealer-up-card) 2c76f0],  strategy2 = #[closure arglist=(customer-hand-so-far dealer-up-card) 2c64e0]
+.. <- suit-strategy returns #[closure arglist=(customer-hand-so-far dealer-up-card) 2c4f20]
+.. -> check-for-suit with suit = d,  customer-hand-so-far = (kd "10d")
+.. <- check-for-suit returns #t
+1
+STk> (twenty-one (suit-strategy 'd (stop-at 19) (stop-at 16)))
+.. -> stop-at with n = 19
+.. <- stop-at returns #[closure arglist=(customer-hand-so-far dealer-up-card) 2da550]
+.. -> stop-at with n = 16
+.. <- stop-at returns #[closure arglist=(customer-hand-so-far dealer-up-card) 2d9490]
+.. -> suit-strategy with suit = d,  strategy1 = #[closure arglist=(customer-hand-so-far dealer-up-card) 2da550],  strategy2 = #[closure arglist=(customer-hand-so-far dealer-up-card) 2d9490]
+.. <- suit-strategy returns #[closure arglist=(customer-hand-so-far dealer-up-card) 2d87b0]
+.. -> check-for-suit with suit = d,  customer-hand-so-far = (kh "3h")
+.. <- check-for-suit returns #f
+-1
+STk> (transcript-off)

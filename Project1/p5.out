@@ -1,0 +1,10 @@
+okay
+STk> ((stop-at 19) '("10d" "9h") "js")
+.. -> stop-at with n = 19
+.. <- stop-at returns #[closure arglist=(customer-hand-so-far dealer-up-card) 44a9f0]
+#f
+STk> ((stop-at 19) '("kc" "6d") "as")
+.. -> stop-at with n = 19
+.. <- stop-at returns #[closure arglist=(customer-hand-so-far dealer-up-card) 444450]
+#t
+STk> (transcript-off)

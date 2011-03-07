@@ -98,25 +98,25 @@
 ;;=================================================================
 
 (define (dealer-sensitive customer-hand-so-far dealer-up-card)
-  (define (dealer-cond1? card)
-    (let ((card-value (new-strip card))
-	  (if (or
-	       (equal? card-value 'a)
-	       (equal? card-value 7)
-	       (equal? card-value 8)
-	       (equal? card-value 9)
-	       (equal? card-value 10)
-	       (equal? card-value 'k)
-	       (equal? card-value 'q)
-	       (equal? card-value 'j)) #t
-	       #f))))
-  (define (dealer-cond2? card)
+  (define (dealer-cond1? dealer-up-card)
+     (if (or
+	  (member? 'a dealer-up-card)
+	  (member? 7 dealer-up-card)
+	  (member? 8 dealer-up-card)
+	  (member? 9 dealer-up-card)
+	  ;; 10 is a weird case where it doesn't like to compare a 2-digit number or word to a word, so you have to strip the dealer card of suit and turn it into a sentence if it's not already
+	  (member? 10 (se (new-strip dealer-up-card)))
+	  (member? 'k dealer-up-card)
+	  (member? 'q dealer-up-card)
+	  (member? 'j dealer-up-card)) #t
+	  #f))
+  (define (dealer-cond2? dealer-up-card)
     (if (or
-	 (equal? card 2)
-	 (equal? card 3)
-	 (equal? card 4)
-	 (equal? card 5)
-	 (equal? card 6)) #t
+	 (member? 2 dealer-up-card)
+	 (member? 3 dealer-up-card)
+	 (member? 4 dealer-up-card)
+	 (member? 5 dealer-up-card)
+	 (member? 6 dealer-up-card)) #t
 	 #f))
   (if (or
        (and (dealer-cond1? dealer-up-card) (< (best-total customer-hand-so-far) 17))
@@ -146,8 +146,14 @@
 
 ;;=================================================================
 
+(define (check-for-suit suit customer-hand-so-far)
+  (if (member? suit (every bf customer-hand-so-far)) #t
+      #f))
+
+;;=================================================================
+
 (define (suit-strategy suit strategy1 strategy2)
-  (lambda (customer-hand-so-far dealer-up-card) (if (on-suit suit customer-hand-so-far dealer-up-card) (strategy1 customer-hand-so-far dealer-up-card)
+  (lambda (customer-hand-so-far dealer-up-card) (if (check-for-suit suit customer-hand-so-far) (strategy1 customer-hand-so-far dealer-up-card)
 						    (strategy2 customer-hand-so-far dealer-up-card))))
 
 ;;=================================================================
