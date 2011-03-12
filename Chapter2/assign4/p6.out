@@ -1,0 +1,8 @@
+okay
+STk> (load "~/Documents/projects/CIS61-STk/Chapter2/assign4/p6.scm")
+okay
+STk> (same-parity 1 2 3 4 5 6 7)
+(1 3 5 7)
+STk> (same-parity 2 3 4 5 6 7)
+(2 4 6)
+STk> (transcript-off)

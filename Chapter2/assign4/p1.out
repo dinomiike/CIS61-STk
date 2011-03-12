@@ -1,0 +1,9 @@
+okay
+STk> (load "~/Documents/projects/CIS61-STk/Chapter2/assign4/p1.scm")
+okay
+STk> (midpoint-segment (make-segment (make-point 3 6) (make-point 15 14)))
+(9 . 10)
+STk> (print-point (midpoint-segment (make-segment (make-point 3 6) (make-point 15 14))))
+
+(9,10)okay
+STk> (transcript-off)

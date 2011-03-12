@@ -1,0 +1,18 @@
+okay
+STk> (load "~/Documents/projects/CIS61-STk/Chapter2/assign4/p9.scm")
+okay
+STk> (define x (list (list 1 2) (list 3 4)))
+x
+STk> x
+
+((1 2) (3 4))
+STk> (deep-reverse x)
+((4 3) (2 1))
+STk> (define another-x (list 4 (list 3 2) (list 1 0)))
+another-x
+STk> (deep-reverse another-x)
+((0 1) (2 3) 4)
+STk> another-x
+
+(4 (3 2) (1 0))
+STk> (transcript-off)

@@ -1,0 +1,12 @@
+okay
+STk> (load "~/Documents/projects/CIS61-STk/Chapter2/assign4/p5.scm")
+okay
+STk> (cc 100 us-coins)
+292
+STk> (cc 100 rev-us-coins)
+292
+STk> (cc 100 uk-coins)
+104561
+STk> (cc 100 rev-uk-coins)
+104561
+STk> (transcript-off)

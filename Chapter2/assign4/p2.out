@@ -1,0 +1,8 @@
+okay
+STk> (load "~/Documents/projects/CIS61-STk/Chapter2/assign4/p2.scm")
+okay
+STk> (car (cons 5 8))
+5
+STk> (cdr (cons 5 8))
+8
+STk> (transcript-off)

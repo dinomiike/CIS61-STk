@@ -1,0 +1,10 @@
+okay
+STk> (load "~/Documents/projects/CIS61-STk/Chapter2/assign4/p4.scm")
+okay
+STk> (reverse (list 1 4 9 16 25))
+(25 16 9 4 1)
+STk> (reverse (list 5 4 3 2 1))
+(1 2 3 4 5)
+STk> (reverse (list nil))
+(())
+STk> (transcript-off)

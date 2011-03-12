@@ -1,0 +1,8 @@
+okay
+STk> (load "~/Documents/projects/CIS61-STk/Chapter2/assign4/p7.scm")
+okay
+STk> (square-list (list 1 2 3 4))
+(1 4 9 16)
+STk> (square-list (list 5 8 10))
+(25 64 100)
+STk> (transcript-off)
