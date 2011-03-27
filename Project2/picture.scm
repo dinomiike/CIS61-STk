@@ -128,13 +128,8 @@
 ;; Your code goes here
 ;;
 
-(define full-frame (make-frame (make-vect -0.5 -0.5)
-			       (make-vect 2 0)
-			       (make-vect 0 2)))
-
-
-
 ;; ================================================================================================
+;; Exercise 2.44
 
 (define (up-split painter n)
   (if (= n 0) painter
@@ -142,6 +137,7 @@
 	(below painter (beside smaller smaller)))))
 
 ;; ================================================================================================
+;; Exercise 2.45
 
 (define (split a b)
   (define (helper a b painter n)
@@ -151,6 +147,7 @@
   (lambda (painter n) (helper a b painter n)))
 
 ;; ================================================================================================
+;; Exercise 2.46
 
 (define (make-vect x y)
   (cons x y))
@@ -171,6 +168,13 @@
   (make-vect (* s (xcor-vect v)) (* s (ycor-vect v))))
 
 ;; ================================================================================================
+;; Exercise 2.47
+
+(define (make-frame origin edge1 edge2)
+  (list origin edge1 edge2))
+
+;;(define (make-frame origin edge1 edge2)
+;;  (cons origin (cons edge1 edge2)))
 
 (define (origin-frame frame)
   (make-vect (xcor-vect (car frame)) (ycor-vect (car frame))))
@@ -183,6 +187,7 @@
       (make-vect (xcor-vect (cddr frame)) (ycor-vect (cddr frame)))))
 
 ;; ================================================================================================
+;; Exercise 2.48
 
 (define (make-segment s e)
   (cons s e))
@@ -195,8 +200,8 @@
 
 ;; ================================================================================================
 
-;; 2.48
-;; A
+;; 2.49
+;; Part A
 (define outline-frame (segments->painter
 		       (list
 			(make-segment (make-vect 0 1) (make-vect 0 0))
@@ -204,23 +209,36 @@
 			(make-segment (make-vect 1 1) (make-vect 1 0))
 			(make-segment (make-vect 0 0) (make-vect 1 0)))))
 
-;; B
+;; Part B
 (define draw-x (segments->painter
 		(list
-		 (make-segment (make-vect 1 0) (make-vect 1 0))
-		 (make-segment (make-vect 1 1) (make-vect 0 0)))))
+		 (make-segment (make-vect 0.0 1.0) (make-vect 1.0 0.0))
+		 (make-segment (make-vect 1.0 1.0) (make-vect 0.0 0.0)))))
 
-;; C
+;; Part C
 (define draw-diamond (segments->painter
 		      (list
-		       (make-segment (make-vect 0.25 1) (make-vect 0.75 1))
-		       (make-segment (make-vect 0.25 1) (make-vect 0 0.5))
-		       (make-segment (make-vect 0 0.5) (make-vect 0.5 0))
-		       (make-segment (make-vect 0.5 0) (make-vect 1 0.5))
-		       (make-segment (make-vect 1 0.5) (make-vect 0.75 1))
-		       (make-segment (make-vect 0 0.5) (make-vect 1 0.5)))))
+		       (make-segment (make-vect 0.20 1) (make-vect 0.80 1))
+		       (make-segment (make-vect 0.20 1) (make-vect 0 0.65))
+		       (make-segment (make-vect 0 0.65) (make-vect 0.5 0))
+		       (make-segment (make-vect 0.5 0) (make-vect 1 0.65))
+		       (make-segment (make-vect 1 0.65) (make-vect 0.80 1))
+		       (make-segment (make-vect 0 0.65) (make-vect 1 0.65))
+		       (make-segment (make-vect 0.20 1) (make-vect 0.10 0.65))
+		       (make-segment (make-vect 0.10 0.65) (make-vect 0.5 0))
+		       (make-segment (make-vect 0.80 1) (make-vect 0.90 0.65))
+		       (make-segment (make-vect 0.90 0.65) (make-vect 0.5 0))
+		       ;; Top shading line
+		       (make-segment (make-vect 0.22 0.98) (make-vect 0.15 0.68))
+		       (make-segment (make-vect 0.78 0.98) (make-vect 0.86 0.68))
+		       (make-segment (make-vect 0.15 0.68) (make-vect 0.86 0.68))
+		       ;; Bottom shading line
+		       (make-segment (make-vect 0.15 0.62) (make-vect 0.86 0.62))
+		       (make-segment (make-vect 0.15 0.62) (make-vect 0.49 0.05))
+		       (make-segment (make-vect 0.86 0.62) (make-vect 0.51 0.05))
+		       )))
 
-;; D
+;; Part D
 (define draw-george (segments->painter
 		     (list
 		      (make-segment (make-vect 0.44 0.875) (make-vect 0.505 1))
@@ -240,6 +258,11 @@
 		      (make-segment (make-vect 0.56 0.71875) (make-vect 0.69 0.71875))
 		      (make-segment (make-vect 0.56 0.74875) (make-vect 0.625 0.875))
 		      (make-segment (make-vect 0.56 1) (make-vect 0.625 0.875)))))
+
+(define draw-base (segments->painter
+		   (list
+		    (make-segment (make-vect 0.0 0.5) (make-vect 1.0 0.5))
+		    (make-segment (make-vect 0.5 1.0) (make-vect 0.5 0.0)))))
 
 ;; ================================================================================================
 ;; Exercise 2.50
@@ -307,4 +330,55 @@
 ;; ================================================================================================
 ;; Exercise 2.52
 
-;; Do it now!
+;; Part A - Come back to this
+(define draw-george2 (segments->painter
+		     (list
+		      (make-segment (make-vect 0.44 0.875) (make-vect 0.505 1))
+		      (make-segment (make-vect 0.44 0.875) (make-vect 0.505 0.71875))
+		      (make-segment (make-vect 0.375 0.71875) (make-vect 0.505 0.71875))
+		      (make-segment (make-vect 0.25 0.625) (make-vect 0.375 0.71875))
+		      (make-segment (make-vect 0 0.875) (make-vect 0.25 0.625))
+		      (make-segment (make-vect 0 0.75) (make-vect 0.25 0.45))
+		      (make-segment (make-vect 0.25 0.45) (make-vect 0.375 0.6875))
+		      (make-segment (make-vect 0.375 0.6875) (make-vect 0.44 0.6))
+		      (make-segment (make-vect 0.3 0) (make-vect 0.44 0.6))
+		      (make-segment (make-vect 0.505 0) (make-vect 0.5 0.35))
+		      (make-segment (make-vect 0.5 0.35) (make-vect 0.56 0))
+		      (make-segment (make-vect 0.625 0.6) (make-vect 0.7 0))
+		      (make-segment (make-vect 0.625 0.6) (make-vect 1 0.25))
+		      (make-segment (make-vect 0.69 0.71875) (make-vect 1 0.35))
+		      (make-segment (make-vect 0.56 0.71875) (make-vect 0.69 0.71875))
+		      (make-segment (make-vect 0.56 0.74875) (make-vect 0.625 0.875))
+		      (make-segment (make-vect 0.56 1) (make-vect 0.625 0.875)))))
+
+;; Part B
+(define (corner-split2 painter n)
+  (if (= n 0)
+      painter
+      (let ((up (up-split painter (- n 1)))
+            (right (right-split painter (- n 1))))
+        (let ((top-left up)
+              (bottom-right right)
+              (corner (corner-split painter (- n 1))))
+          (beside (below painter top-left)
+                  (below bottom-right corner))))))
+
+;; Part C
+;; The original square-limit procedure:
+;;(define (square-limit painter n)
+;;  (let ((combine4 (square-of-four flip-horiz identity rotate180 flip-vert)))
+;;    (combine4 (corner-split painter n))))
+
+(define (square-limit2 painter n)
+  (let ((combine4 (square-of-four identity flip-horiz flip-vert rotate180)))
+    (combine4 (corner-split painter n))))
+
+;; ================================================================================================
+
+(define full-frame (make-frame (make-vect -0.5 -0.5)
+			       (make-vect 2 0)
+			       (make-vect 0 2)))
+
+
+
+
