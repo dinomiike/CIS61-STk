@@ -1,0 +1,18 @@
+okay
+STk> (load "~/Documents/projects/CIS61-STk/Chapter3/assign5/p4.scm")
+okay
+STk> (define acc (make-account 100))
+acc
+STk> ((acc 'withdraw) 50)
+50
+STk> ((acc 'deposit) 10)
+60
+STk> (acc 'transactions)
+((withdraw 50) (deposit 10))
+STk> (define (factorial n)
+       (if (= n 1) 1
+	   (* n (factorial (- n 1)))))
+factorial
+STk> (factorial 6)
+720
+STk> (transcript-on "~/Documents/projects/CIS61-STk/Chapter3/p2.out")

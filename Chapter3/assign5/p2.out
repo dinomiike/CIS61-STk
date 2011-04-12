@@ -1,0 +1,18 @@
+okay
+STk> (load "~/Documents/projects/CIS61-STk/Chapter3/assign5/p2.scm")
+okay
+STk> (define dk (make-account2 100))
+dk
+STk> ((dk 'deposit) 500)
+600
+STk> ((dk 'withdraw) 45)
+555
+STk> ((dk 'withdraw) 600)
+-45
+STk> (transcript-off)
+
+;; =================================================
+
+This works but it doesn't check, if the message is withdraw, that the amount is less than the balance.
+I can't think of a way to do it without modifying the rest of the procedure. If you have to only modify 
+that let, I think you have to accept the possibility of the procedure returning negative numbers.

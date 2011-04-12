@@ -1,0 +1,20 @@
+okay
+STk> (load "~/Documents/projects/CIS61-STk/Chapter2/assign5/p1.scm")
+okay
+STk> (define brian (instantiate person 'brian))
+brian
+STk> (ask brian 'repeat)
+()
+STk> (ask brian 'say '(hello))
+(hello)
+STk> (ask brian 'repeat)
+(hello)
+STk> (ask brian 'greet)
+(hello my name is brian)
+STk> (ask brian 'repeat)
+(hello my name is brian)
+STk> (ask brian 'ask '(close the door))
+(would you please close the door)
+STk> (ask brian 'repeat)
+(would you please close the door)
+STk> (transcript-off)
