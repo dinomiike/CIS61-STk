@@ -117,6 +117,17 @@
 	     (set! place new-place)
 	     (ask new-place 'enter self))))) )
 
+;;===========================================================================
+;; Part 1 - Problem 2F
+;;===========================================================================
+(define (whereis person)
+  (ask (ask person 'place) 'name))
+
+(define (owner some-thing)
+  (if (eq? (ask some-thing 'possessor) 'no-one) 'no-one
+      (ask (ask some-thing 'possessor) 'name)))
+
+
 (define thing
   (let ()
     (lambda (class-message)
@@ -140,6 +151,23 @@
 	       (else (no-method 'thing))))
 	    dispatch)))
        (else (error "Bad message to class" class-message))))))
+
+;;===========================================================================
+;; Part 1 - Problem 2E
+;;===========================================================================
+(define-class (thing2 name)
+  (instance-vars
+   (possessor 'no-one))
+  (initialize
+   (set! self name))
+  (method (send-usual-to-parent)
+	  (error "Can't use USUAL without a parent." 'thing))
+  (method (possessor) possessor)
+  (method (type) 'thing)
+  (method (change-possessor new-possessor)
+	  (set! possessor new-possessor))
+  (default-method
+    (error "Bad message to class " message)))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
