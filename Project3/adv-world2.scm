@@ -56,7 +56,7 @@
 (define Brian (instantiate person 'Brian BH-Office))
 (define hacker (instantiate person 'hacker 61A-lab))
 (define nasty (instantiate thief 'nasty sproul-plaza))
-(define Miike (instantiate person 'Miike Telegraph-Ave))
+(define Miike (instantiate person 'Miike Dormitory))
 
 (define (sproul-hall-exit)
    (error "You can check out any time you'd like, but you can never leave"))
@@ -94,3 +94,10 @@
 
 (define Potstickers (instantiate thing 'Potstickers))
 (ask Kirin 'appear Potstickers)
+
+(define 3DS (instantiate thing 'Nintendo-3DS))
+(ask Dormitory 'appear 3DS)
+(define MacBookPro (instantiate thing'MacBookPro))
+(ask Dormitory 'appear MacBookPro)
+(define iPhone (instantiate thing 'iPhone))
+(ask Dormitory 'appear iPhone)

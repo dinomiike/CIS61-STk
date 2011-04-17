@@ -93,6 +93,9 @@
 	       
 	   (ask thing 'change-possessor self)
 	   'taken)))
+  (method (take-all)
+	  (if (null? (ask self 'look-around)) "There is nothing to take"
+	      (filter (lambda (thing) (if (and (thing? thing) (eq? (owner thing) 'no-one)) (ask self 'take thing))) (ask (ask self 'place) 'things))))
 
   (method (lose thing)
     (set! possessions (delete thing possessions))
@@ -126,6 +129,13 @@
 (define (owner some-thing)
   (if (eq? (ask some-thing 'possessor) 'no-one) 'no-one
       (ask (ask some-thing 'possessor) 'name)))
+
+(define (reload-me)
+  (define Miike (instantiate person 'Miike Dormitory)))
+
+(define (show-my-stuff person)
+  (map (lambda (thing) (ask thing 'name)) (ask person 'possessions)))
+
 
 
 (define thing
