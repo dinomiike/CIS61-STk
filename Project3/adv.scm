@@ -9,6 +9,7 @@
    (people '())
    (entry-procs '())
    (exit-procs '()))
+  (parent (basic-object))
   (method (type) 'place)
   (method (neighbors) (map cdr directions-and-neighbors))
   (method (exits) (map car directions-and-neighbors))
@@ -58,7 +59,9 @@
   (method (clear-all-procs)
     (set! exit-procs '())
     (set! entry-procs '())
-    'cleared) )
+    'cleared)
+  (default-method
+    (ask self 'get message)) )
 
 (define-class (person name place)
   (instance-vars
@@ -66,6 +69,7 @@
    (saying ""))
   (initialize
    (ask place 'enter self))
+  (parent (basic-object))
   (method (type) 'person)
   (method (look-around)
     (map (lambda (obj) (ask obj 'name))
@@ -118,7 +122,9 @@
 		(ask new-place 'appear p))
 	      possessions)
 	     (set! place new-place)
-	     (ask new-place 'enter self))))) )
+	     (ask new-place 'enter self)))))
+  (default-method
+    (ask self 'get message)) )
 
 ;;===========================================================================
 ;; Part 1 - Problem 2F
@@ -138,38 +144,39 @@
 
 
 
-(define thing
-  (let ()
-    (lambda (class-message)
-      (cond
-       ((eq? class-message 'instantiate)
-	(lambda (name)
-	  (let ((self '()) (possessor 'no-one))
-	    (define (dispatch message)
-	      (cond
-	       ((eq? message 'initialize)
-		(lambda (value-for-self)
-		  (set! self value-for-self)))
-	       ((eq? message 'send-usual-to-parent)
-		(error "Can't use USUAL without a parent." 'thing))
-	       ((eq? message 'name) (lambda () name))
-	       ((eq? message 'possessor) (lambda () possessor))
-	       ((eq? message 'type) (lambda () 'thing))
-	       ((eq? message 'change-possessor)
-		(lambda (new-possessor)
-		  (set! possessor new-possessor)))
-	       (else (no-method 'thing))))
-	    dispatch)))
-       (else (error "Bad message to class" class-message))))))
+;;(define thing
+;;  (let ()
+;;    (lambda (class-message)
+;;      (cond
+;;       ((eq? class-message 'instantiate)
+;;	(lambda (name)
+;;	  (let ((self '()) (possessor 'no-one))
+;;	    (define (dispatch message)
+;;	      (cond
+;;	       ((eq? message 'initialize)
+;;		(lambda (value-for-self)
+;;		  (set! self value-for-self)))
+;;	       ((eq? message 'send-usual-to-parent)
+;;		(error "Can't use USUAL without a parent." 'thing))
+;;	       ((eq? message 'name) (lambda () name))
+;;	       ((eq? message 'possessor) (lambda () possessor))
+;;	       ((eq? message 'type) (lambda () 'thing))
+;;	       ((eq? message 'change-possessor)
+;;		(lambda (new-possessor)
+;;		  (set! possessor new-possessor)))
+;;	       (else (no-method 'thing))))
+;;	    dispatch)))
+;;       (else (error "Bad message to class" class-message))))))
 
 ;;===========================================================================
 ;; Part 1 - Problem 2E
 ;;===========================================================================
-(define-class (thing2 name)
+(define-class (thing name)
   (instance-vars
    (possessor 'no-one))
   (initialize
    (set! self name))
+  (parent (basic-object))
   (method (send-usual-to-parent)
 	  (error "Can't use USUAL without a parent." 'thing))
   (method (possessor) possessor)
@@ -177,7 +184,33 @@
   (method (change-possessor new-possessor)
 	  (set! possessor new-possessor))
   (default-method
-    (error "Bad message to class " message)))
+    (ask self 'get message)))
+    ;;(error "Bad message to class " message)))
+
+
+;;===========================================================================
+;; Part 1 - Problem B4A
+;;===========================================================================
+;;(define-class (basic-object)
+;;  (instance-vars (properties make-table))
+;;  (method (put (table make-table) value)
+;;	  (insert! self value properties))
+;;  (method (get table)
+;;	  (lookup properties self))
+;;  (default-method
+;;    (lookup self message)))
+;;###################################
+;; (define settings (make-table))
+;; (insert! 'strength 100 settings)
+;; (lookup 'strength settings)
+;;###################################
+(define-class (basic-object)
+  (instance-vars (properties (make-table)))
+  (method (put property value)
+	  (insert! property value properties))
+  (method (get property)
+	  (lookup property properties)))
+
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
