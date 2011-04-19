@@ -1,0 +1,12 @@
+okay
+STk> (ask miike 'strength)
+10
+STk> (ask miike 'put 'charisma 5)
+ok
+STk> (ask miike 'charisma)
+5
+STk> (ask brian 'put 'wisdom 7)
+ok
+STk> (ask brian 'wisdom)
+7
+STk> (transcript-off)

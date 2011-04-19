@@ -1,0 +1,32 @@
+okay
+STk> (ask miike 'take macbookpro)
+*** Error:
+    You already have it!
+Current eval stack:
+__________________
+  0    (apply stk-error args)
+STk> (ask macbookpro 'connect 'scoops)
+okay
+STk> (ask macbookpro 'surf "http://www.google.com")
+32512
+STk> (ask miike 'go 'west)
+
+
+miike moved from dormitory to 61a-lab
+"The computers seem to be down"
+appeared
+STk> (ask dormitory 'connected-laptops)
+()
+STk> (ask miike 'go 'east)
+"The workstations come back to life just in time."
+
+
+miike moved from 61a-lab to dormitory
+appeared
+STk> (ask macbookpro 'surf "http://www.google.com")
+*** Error:
+    You are not connected to the network
+Current eval stack:
+__________________
+  0    (apply stk-error args)
+STk> (transcript-off)

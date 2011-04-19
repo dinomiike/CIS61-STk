@@ -1,0 +1,14 @@
+okay
+STk> (ask miike 'person?)
+#t
+STk> (ask macbookpro 'person?)
+#f
+STk> (ask 3ds 'thing?)
+#t
+STk> (ask 3ds 'place?)
+#f
+STk> (ask 61a-lab 'place?)
+#t
+STk> (ask 61a-lab 'person?)
+#f
+STk> (transcript-off)

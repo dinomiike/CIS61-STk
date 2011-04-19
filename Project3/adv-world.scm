@@ -16,8 +16,8 @@
 (define Intermezzo (instantiate place 'Intermezzo))
 (define Haas (instantiate place 'Haas-Business-School))
 (define s-h (instantiate place 'sproul-hall))
-(define Dormitory (instantiate place 'Dormitory))
 (define Kirin (instantiate place 'Kirin))
+(define Dormitory (instantiate hotspot 'Dormitory 'scoops))
 
 
 (can-go Soda 'up art-gallery)
@@ -28,7 +28,6 @@
 (can-go MJC-office 'west art-gallery)
 (can-go Soda 'down 61A-Lab)
 (can-go 61A-Lab 'up Soda)
-(can-go 61A-Lab 'east Dormitory)
 (can-go Soda 'south Pimentel)
 (can-go Pimentel 'north Soda)
 (can-go Pimentel 'south Haas)
@@ -44,8 +43,10 @@
 (can-go Noahs 'north Telegraph-Ave)
 (can-go Noahs 'south Intermezzo)
 (can-go Intermezzo 'north Noahs)
+(can-go Soda 'north Kirin)
+(can-go Kirin 'south Soda)
 (can-go Dormitory 'west 61A-Lab)
-(can-go Soda 'north 'Kirin)
+(can-go 61A-Lab 'east Dormitory)
 
 ;; Some people.
 ; MOVED above the add-entry-procedure stuff, to avoid the "The computers
@@ -93,3 +94,10 @@
 
 (define Potstickers (instantiate thing 'Potstickers))
 (ask Kirin 'appear Potstickers)
+
+(define 3DS (instantiate thing 'Nintendo-3DS))
+(ask Dormitory 'appear 3DS)
+(define MacBookPro (instantiate laptop 'MacBookPro))
+(ask Dormitory 'appear MacBookPro)
+(define iPhone (instantiate thing 'iPhone))
+(ask Dormitory 'appear iPhone)

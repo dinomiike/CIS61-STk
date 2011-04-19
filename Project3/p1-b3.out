@@ -1,0 +1,16 @@
+okay
+STk> (ask miike 'look-around)
+(iphone macbookpro nintendo-3ds)
+STk> (ask miike 'possessions)
+()
+STk> (ask miike 'take-all)
+
+miike took iphone
+
+miike took macbookpro
+
+miike took nintendo-3ds
+(#[closure arglist=(message) 2ca040] #[closure arglist=(message) 2d6f80] #[closure arglist=(message) 40d530])
+STk> (ask miike 'possessions)
+(#[closure arglist=(message) 40d530] #[closure arglist=(message) 2d6f80] #[closure arglist=(message) 2ca040])
+STk> (transcript-off)

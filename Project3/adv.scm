@@ -70,7 +70,8 @@
    (possessions '())
    (saying ""))
   (initialize
-   (ask place 'enter self))
+   (ask place 'enter self)
+   (ask self 'put 'strength 10))
   (parent (basic-object))
   (method (type) 'person)
   (method (look-around)
@@ -121,7 +122,11 @@
 	     (for-each
 	      (lambda (p)
 		(ask place 'gone p)
-		(ask new-place 'appear p))
+		(ask new-place 'appear p)
+		(if (ask p 'laptop?)
+		    (if (ask place 'hotspot?)
+			(if (memq p (ask place 'connected-laptops))
+			    (ask place 'gone-hotspot p)))))
 	      possessions)
 	     (set! place new-place)
 	     (ask new-place 'enter self)))))
@@ -192,6 +197,8 @@
     ;;(error "Bad message to class " message)))
 
 
+
+
 ;;===========================================================================
 ;; Part 1 - Problem B4A
 ;;===========================================================================
@@ -214,6 +221,46 @@
 	  (insert! property value properties))
   (method (get property)
 	  (lookup property properties)))
+
+
+
+
+(define-class (hotspot name pass)
+  (instance-vars
+   (password pass)
+   (connected-laptops '()))
+  (parent (place name))
+  (method (hotspot?) #t)
+  (method (gone-hotspot cl)
+	  (if (not (memq cl connected-laptops))
+	      (error "Cannot delete a non-item")
+	  (set! connected-laptops (delete cl connected-laptops))))
+  (method (connect laptop pass)
+	  ;; If the password submitted matches the password for this hotspot and the laptop is inside the hotspot, allow connection
+	  (if (and (eq? pass password)
+		   (eq? self (ask (ask laptop 'possessor) 'place))) (set! connected-laptops (cons laptop connected-laptops))
+	      "You cannot connect..."))
+  (method (surf laptop url)
+	  ;; This will evaluate to #f if the laptop is not connected to the network, otherwise allow surfage
+	  (if (memq laptop connected-laptops) (system (string-append "lynx " url))
+	      (error "You are not connected to the network")))
+  (default-method
+    (ask self 'get message)))
+
+(define-class (laptop name)
+  (parent (thing name))
+  (method (laptop?) #t)
+  (method (connect pass)
+	  (ask
+	   ;; Possessors place
+	   (ask (ask self 'possessor) 'place)
+	   'connect self pass))
+  (method (surf url)
+	  (ask
+	   (ask (ask self 'possessor) 'place)
+	   'surf self url))
+  (default-method
+    (ask self 'get message)))
 
 
 
