@@ -40,6 +40,8 @@
 	(error "Disappearing person not here" (list name person)))
     (set! people (delete person people)) 
     'disappeared)
+  ;; Problem B4B
+  (method (place?) #t)
 
   (method (new-neighbor direction neighbor)
     (if (assoc direction directions-and-neighbors)
@@ -123,6 +125,8 @@
 	      possessions)
 	     (set! place new-place)
 	     (ask new-place 'enter self)))))
+  ;; Problem B4B
+  (method (person?) #t)
   (default-method
     (ask self 'get message)) )
 
@@ -174,8 +178,6 @@
 (define-class (thing name)
   (instance-vars
    (possessor 'no-one))
-  (initialize
-   (set! self name))
   (parent (basic-object))
   (method (send-usual-to-parent)
 	  (error "Can't use USUAL without a parent." 'thing))
@@ -183,8 +185,10 @@
   (method (type) 'thing)
   (method (change-possessor new-possessor)
 	  (set! possessor new-possessor))
+  (method (thing?) #t)
   (default-method
     (ask self 'get message)))
+    ;;(ask self 'get class-message)))
     ;;(error "Bad message to class " message)))
 
 

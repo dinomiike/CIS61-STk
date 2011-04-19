@@ -28,6 +28,7 @@
 (can-go MJC-office 'west art-gallery)
 (can-go Soda 'down 61A-Lab)
 (can-go 61A-Lab 'up Soda)
+(can-go 61A-Lab 'east Dormitory)
 (can-go Soda 'south Pimentel)
 (can-go Pimentel 'north Soda)
 (can-go Pimentel 'south Haas)
