@@ -1,0 +1,20 @@
+okay
+STk> (load "~/Documents/projects/CIS61-STk/Chapter3/assign6/p3.scm")
+okay
+STk> (define flower (vector 'one 'two 'three))
+flower
+STk> (define banana (vector 'four 'five 'six))
+banana
+STk> flower
+
+#(one two three)
+STk> banana
+#(four five six)
+STk> (vector-append flower banana)
+#(one two three four five six)
+STk> (define tree (vector-append (vector 1 2 3) (vector-append flower banana)))
+tree
+STk> tree
+
+#(1 2 3 one two three four five six)
+STk> (transcript-off)

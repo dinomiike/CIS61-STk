@@ -57,25 +57,124 @@
 	false)))
 
 (define (insert2! keys value table)
-  (if (null? keys) "Stopping")
   (let ((subitem (assoc (car keys) (cdr table))))
     (if subitem
-	;; Returns true -- do some stuff
-	"The first key is already in the table. Stopping for now"
-	;; Returns false -- is it a base case?
-	(if (not (pair? (cdr table))) ;;(set-cdr! subitem
-						  ;;(cons (cons (car keys) value)
-							;;(cdr subitem)))
-	    "You have reached the base case -- add to the list"
-	    ;; This is not a base case, recurse
-	    ;;(insert2! (cdr keys) value subitem))))
-	    (begin
-	      (cdr keys)
-	      (newline)
-	      value
-	      (newline)
-	      (cdr table)
-	      (newline)
-	      (insert2! (cdr keys) value (cdr table))))))
-  ;;'ok)
- )
+	(let ((subitem2 (assoc (cdr keys) (cdr subitem))))
+	  (if subitem2
+	      "Both keys match"
+	      "Only first key matches"))
+	"No match")))
+
+
+
+
+;;=====================
+;;====================
+(*table* (math (+ . 43)))
+STk> (define db2 (make-table))
+db2
+STk> db2
+(*table*)
+STk> (set-cdr! db2 (cons (list 'math) (cdr db2)))
+okay
+STk> db2
+(*table* (math))
+STk> (cdr db2)
+((math))
+STk> (set-cdr! db2 (cons (list '+ 43) (cdr db2)))
+okay
+STk> db2
+(*table* (+ 43) (math))
+STk> (define db2 (make-table))
+db2
+STk> (set-cdr! db2 (cons (list 'math) (cdr db2)))
+okay
+STk> db2
+(*table* (math))
+STk> (set-cdr! db2 (cons (cdr db2) (list (cons '+ 43))))
+okay
+STk> db2
+(*table* ((math)) (+ . 43))
+STk> (define db2 (make-table))
+db2
+STk> db2
+(*table*)
+STk> (set-cdr! db2 (cons (list 'math) (cdr db2)))
+okay
+STk> db2
+(*table* (math))
+STk> (set-cdr! db2 (cons (cons '+ 43) (cadr db2)))
+okay
+STk> db2
+(*table* (+ . 43) math)
+STk> newdb
+(*table* (math (+ . 43)))
+STk> (define db2 (make-table))
+db2
+STk> (set-cdr! db2 (cons (list 'math) (cdr db2)))
+okay
+STk> db2
+(*table* (math))
+STk> (set-cdr! db2 (cons (cons (cadr db2) (cons '+ 43)) (cdr db2)))
+okay
+STk> db2
+(*table* ((math) + . 43) (math))
+STk> (define db2 (make-table))
+db2
+STk> (set-cdr! db2 (cons (list 'math)) (cdr db2))
+*** Error:
+    eval: Bad number of parameters: (set-cdr! db2 (cons (list (quote math))) (cdr db2))
+Current eval stack:
+__________________
+  0    (set-cdr! db2 (cons (list (quote math))) (cdr db2))
+STk> db2
+(*table*)
+STk> (set-cdr! db2 (cons (list 'math) (cdr db2)))
+okay
+STk> db2
+(*table* (math))
+STk> (set-cdr! db2 (cons (cadr db2) (cons '+ 43)))
+okay
+STk> db2
+(*table* (math) + . 43)
+STk> newdb
+(*table* (math (+ . 43)))
+STk> (define db2 (make-table))
+db2
+STk> (set-cdr! db2 (list 'math))
+okay
+STk> db2
+(*table* math)
+STk> (set-cdr! (list 'math) (list (cons '+ 43)))
+okay
+STk> db2
+(*table* math)
+STk> (set-cdr! (cdr db2) (list (cons '+ 43)))
+okay
+STk> db2
+(*table* math (+ . 43))
+STk> (define db2 (make-table))
+db2
+STk> (set-cdr! (cddr db2) (cons (cons '+ 43) (cddr db2)))
+*** Error:
+    cddr: bad list: (*table*)
+Current eval stack:
+__________________
+  0    (cddr db2)
+  1    (set-cdr! (cddr db2) (cons (cons (quote +) 43) (cddr db2)))
+STk> (set-cdr! (assoc 'math (cdr db2)) (cons (cons '+ 43) (assoc 'math (cdr db2))))
+*** Error:
+    set-cdr!: wrong type of argument: #f
+Current eval stack:
+__________________
+  0    (set-cdr! (assoc (quote math) (cdr db2)) (cons (cons (quote +) 43) (assoc (quote math) (cdr db2))))
+STk> db2
+(*table*)
+STk> (set-cdr! db2 (cons (list 'math) (cdr db2))
+)
+okay
+STk> db2
+(*table* (math))
+STk> (set-cdr! (assoc 'math (cdr db2)) (cons (cons '+ 43) (assoc 'math (cdr db2))))
+okay
+STk> db2

@@ -1,0 +1,46 @@
+okay
+STk> (load "~/Documents/projects/CIS61-STk/Chapter3/assign6/p2.scm")
+okay
+STk> (define db (make-table))
+db
+STk> db
+
+(*table*)
+STk> (insert! 'math 100 db)
+ok
+STk> db
+
+(*table* (math . 100))
+STk> (insert! 'english 200 db)
+ok
+STk> (insert! 'physics 300 db)
+ok
+STk> (insert! 'geometry 400 db)
+ok
+STk> db
+
+(*table* (geometry . 400) (physics . 300) (english . 200) (math . 100))
+STk> (delete! 'english db)
+okay
+STk> db
+
+(*table* (geometry . 400) (physics . 300) (english) (math . 100))
+STk> (insert! 'english 200 db)
+ok
+STk> db
+
+(*table* (geometry . 400) (physics . 300) (english . 200) (math . 100))
+STk> (delete! 'geometry db)
+okay
+STk> (delete! 'physics db)
+okay
+STk> (delete! 'english db)
+okay
+STk> (delete 'math db)
+(*table* (geometry) (physics) (english) (math . 100))
+STk> (delete! 'math db)
+okay
+STk> db
+
+(*table* (geometry) (physics) (english) (math))
+STk> (transcript-off)
