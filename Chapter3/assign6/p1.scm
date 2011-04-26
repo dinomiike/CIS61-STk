@@ -56,14 +56,29 @@
 	;; There is no match
 	false)))
 
+;;(define (insert2! keys value table)
+;;  (let ((subitem (assoc (car keys) (cdr table))))
+;;    (if subitem
+;;	(let ((subitem2 (assoc (cdr keys) (cdr subitem))))
+;;	  (if subitem2
+;;	      "Both keys match"
+;;	      "Only first key matches"))
+;;	"No match")))
+
 (define (insert2! keys value table)
-  (let ((subitem (assoc (car keys) (cdr table))))
-    (if subitem
-	(let ((subitem2 (assoc (cdr keys) (cdr subitem))))
-	  (if subitem2
-	      "Both keys match"
-	      "Only first key matches"))
-	"No match")))
+  (let ((subtable (assoc (car keys) (cdr table))))
+    (if subtable
+        (let ((record (assoc (cdr keys) (cdr subtable))))
+          (if record
+              (set-cdr! record value)
+              (set-cdr! subtable
+                        (cons (cons (cadr keys) value)
+                              (cdr subtable)))))
+        (set-cdr! table
+                  (cons (list (car keys)
+                              (cons (cadr keys) value))
+                        (cdr table)))))
+  'ok)
 
 
 
