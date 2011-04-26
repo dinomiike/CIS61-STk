@@ -81,6 +81,22 @@
   'ok)
 
 
+(define (insert3! keys value table)
+  (let ((subitem (assoc (car keys) (cdr table))))
+    (if subitem
+	;; Match
+	(if (> (length keys) 1) (begin
+				  ("The code to add a sub-branch")
+				  (insert3! (cdr keys) value subitem))
+	    (begin
+	      ("The code to add a sub-branch and cons the value to it")))
+	;; No Match
+	(if (> (length keys) 1) (begin
+				  ("The code to add a sub-table")
+				  (insert3! (cdr keys) value table))
+	    (begin
+	      ("The code to add a sub-branch/table and cons the value to it"))))
+    'ok))
 
 
 ;;=====================
