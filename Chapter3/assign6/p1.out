@@ -1,0 +1,25 @@
+okay
+STk> (load "~/Documents/Projects/lisp/CIS61-STk/Chapter3/assign6/p1.scm")
+okay
+STk> (define db (make-table))
+db
+STk> db
+
+(*table*)
+STk> (insert3! (list 'math '+) 43 db)
+ok
+STk> db
+
+(*table* (math (+ . 43)))
+STk> (lookup2 (list 'math '+) db)
+43
+STk> (define db2 (make-table))
+db2
+STk> db2
+
+(*table*)
+STk> (insert3! (list 'letters) 50 db2)
+ok
+STk> (lookup2 (list 'letters) db2)
+50
+STk> (transcript-off)

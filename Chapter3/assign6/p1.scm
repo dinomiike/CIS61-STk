@@ -1,28 +1,30 @@
-;; Original 1-Dimensional Procedure
-;;(define (lookup key table)
-;;  (let ((record (assoc key (cdr table))))
-;;    (if record
-;;	(cdr record)
-;;	false)))
+;; Assignment 6 - Exercise 3.25
+
+;; Original 1-Dimensional Procedures
+(define (lookup1d key table)
+  (let ((record (assoc key (cdr table))))
+    (if record
+	(cdr record)
+	false)))
 
 (define (assoc key records)
   (cond ((null? records) false)
         ((equal? key (caar records)) (car records))
         (else (assoc key (cdr records)))))
 
-;;(define (insert! key value table)
-;;  (let ((record (assoc key (cdr table))))
-;;    (if record
-;;        (set-cdr! record value)
-;;        (set-cdr! table
-;;                  (cons (cons key value) (cdr table)))))
-;;  'ok)
+(define (insert1d! key value table)
+  (let ((record (assoc key (cdr table))))
+    (if record
+        (set-cdr! record value)
+        (set-cdr! table
+                  (cons (cons key value) (cdr table)))))
+  'ok)
 
 (define (make-table)
   (list '*table*))
 
 ;;=============================================================
-
+;; Original 2-Dimensional Procedures
 (define (lookup key-1 key-2 table)
   (let ((subtable (assoc key-1 (cdr table))))
     (if subtable
@@ -57,28 +59,19 @@
 	false)))
 
 ;;(define (insert2! keys value table)
-;;  (let ((subitem (assoc (car keys) (cdr table))))
-;;    (if subitem
-;;	(let ((subitem2 (assoc (cdr keys) (cdr subitem))))
-;;	  (if subitem2
-;;	      "Both keys match"
-;;	      "Only first key matches"))
-;;	"No match")))
-
-(define (insert2! keys value table)
-  (let ((subtable (assoc (car keys) (cdr table))))
-    (if subtable
-        (let ((record (assoc (cdr keys) (cdr subtable))))
-          (if record
-              (set-cdr! record value)
-              (set-cdr! subtable
-                        (cons (cons (cadr keys) value)
-                              (cdr subtable)))))
-        (set-cdr! table
-                  (cons (list (car keys)
-                              (cons (cadr keys) value))
-                        (cdr table)))))
-  'ok)
+;;  (let ((subtable (assoc (car keys) (cdr table))))
+;;    (if subtable
+;;        (let ((record (assoc (cdr keys) (cdr subtable))))
+;;          (if record
+;;              (set-cdr! record value)
+;;              (set-cdr! subtable
+;;                        (cons (cons (cadr keys) value)
+;;                              (cdr subtable)))))
+;;        (set-cdr! table
+;;                  (cons (list (car keys)
+;;                              (cons (cadr keys) value))
+;;                        (cdr table)))))
+;;  'ok)
 
 
 (define (insert3! keys value table)
@@ -86,126 +79,23 @@
     (if subitem
 	;; Match
 	(if (> (length keys) 1) (begin
-				  ("The code to add a sub-branch")
 				  (insert3! (cdr keys) value subitem))
 	    (begin
-	      ("The code to add a sub-branch and cons the value to it")))
+	      (set-cdr! subitem value)))
 	;; No Match
 	(if (> (length keys) 1) (begin
-				  ("The code to add a sub-table")
-				  (insert3! (cdr keys) value table))
+				  (set-cdr! table (cons
+						   (list (car keys))
+						   (cdr table)))
+				  (insert3! (cdr keys) value (cadr table)))
 	    (begin
-	      ("The code to add a sub-branch/table and cons the value to it"))))
-    'ok))
+	      (set-cdr! table (cons
+			       (cons (car keys)
+				     value)
+			       (cdr table)))))))
+  'ok)
+
 
 
 ;;=====================
 ;;====================
-(*table* (math (+ . 43)))
-STk> (define db2 (make-table))
-db2
-STk> db2
-(*table*)
-STk> (set-cdr! db2 (cons (list 'math) (cdr db2)))
-okay
-STk> db2
-(*table* (math))
-STk> (cdr db2)
-((math))
-STk> (set-cdr! db2 (cons (list '+ 43) (cdr db2)))
-okay
-STk> db2
-(*table* (+ 43) (math))
-STk> (define db2 (make-table))
-db2
-STk> (set-cdr! db2 (cons (list 'math) (cdr db2)))
-okay
-STk> db2
-(*table* (math))
-STk> (set-cdr! db2 (cons (cdr db2) (list (cons '+ 43))))
-okay
-STk> db2
-(*table* ((math)) (+ . 43))
-STk> (define db2 (make-table))
-db2
-STk> db2
-(*table*)
-STk> (set-cdr! db2 (cons (list 'math) (cdr db2)))
-okay
-STk> db2
-(*table* (math))
-STk> (set-cdr! db2 (cons (cons '+ 43) (cadr db2)))
-okay
-STk> db2
-(*table* (+ . 43) math)
-STk> newdb
-(*table* (math (+ . 43)))
-STk> (define db2 (make-table))
-db2
-STk> (set-cdr! db2 (cons (list 'math) (cdr db2)))
-okay
-STk> db2
-(*table* (math))
-STk> (set-cdr! db2 (cons (cons (cadr db2) (cons '+ 43)) (cdr db2)))
-okay
-STk> db2
-(*table* ((math) + . 43) (math))
-STk> (define db2 (make-table))
-db2
-STk> (set-cdr! db2 (cons (list 'math)) (cdr db2))
-*** Error:
-    eval: Bad number of parameters: (set-cdr! db2 (cons (list (quote math))) (cdr db2))
-Current eval stack:
-__________________
-  0    (set-cdr! db2 (cons (list (quote math))) (cdr db2))
-STk> db2
-(*table*)
-STk> (set-cdr! db2 (cons (list 'math) (cdr db2)))
-okay
-STk> db2
-(*table* (math))
-STk> (set-cdr! db2 (cons (cadr db2) (cons '+ 43)))
-okay
-STk> db2
-(*table* (math) + . 43)
-STk> newdb
-(*table* (math (+ . 43)))
-STk> (define db2 (make-table))
-db2
-STk> (set-cdr! db2 (list 'math))
-okay
-STk> db2
-(*table* math)
-STk> (set-cdr! (list 'math) (list (cons '+ 43)))
-okay
-STk> db2
-(*table* math)
-STk> (set-cdr! (cdr db2) (list (cons '+ 43)))
-okay
-STk> db2
-(*table* math (+ . 43))
-STk> (define db2 (make-table))
-db2
-STk> (set-cdr! (cddr db2) (cons (cons '+ 43) (cddr db2)))
-*** Error:
-    cddr: bad list: (*table*)
-Current eval stack:
-__________________
-  0    (cddr db2)
-  1    (set-cdr! (cddr db2) (cons (cons (quote +) 43) (cddr db2)))
-STk> (set-cdr! (assoc 'math (cdr db2)) (cons (cons '+ 43) (assoc 'math (cdr db2))))
-*** Error:
-    set-cdr!: wrong type of argument: #f
-Current eval stack:
-__________________
-  0    (set-cdr! (assoc (quote math) (cdr db2)) (cons (cons (quote +) 43) (assoc (quote math) (cdr db2))))
-STk> db2
-(*table*)
-STk> (set-cdr! db2 (cons (list 'math) (cdr db2))
-)
-okay
-STk> db2
-(*table* (math))
-STk> (set-cdr! (assoc 'math (cdr db2)) (cons (cons '+ 43) (assoc 'math (cdr db2))))
-okay
-STk> db2

@@ -1,0 +1,26 @@
+;; In this file I collected the (time) of both procedures.
+;; vector-filter-orig is the one provided in the homework assignment.
+;; They both ran in less than 1 ms but the procedure from the homework assignment
+;; consumed much less memory in total!
+
+okay
+STk> (load "~/Documents/Projects/lisp/CIS61-STk/Chapter3/assign6/p4.scm")
+okay
+STk> (define (vector-filter-orig pred vec)
+       (list->vector (filter pred (vector->list vec))))
+vector-filter-orig
+STk> (define tempvec (vector 1 2 3 4 5 6 7 8 9 10))
+tempvec
+STk> (vector-filter-orig even? tempvec)
+#(2 4 6 8 10)
+STk> (time (vector-filter-orig even? tempvec))
+;;    Time: 0.00ms
+;; GC time: 0.00ms
+;;   Cells: 186
+#(2 4 6 8 10)
+STk> (time (vector-filter2 even? tempvec))
+;;    Time: 0.00ms
+;; GC time: 0.00ms
+;;   Cells: 2448
+#(2 4 6 8 10)
+STk> (transcript-off)
