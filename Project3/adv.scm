@@ -193,8 +193,16 @@
   (method (thing?) #t)
   (default-method
     (ask self 'get message)))
-    ;;(ask self 'get class-message)))
-    ;;(error "Bad message to class " message)))
+
+;;===========================================================================
+;; Part 2 - Problem B6
+;;===========================================================================
+(define-class (food name cal)
+  (instance-vars
+   (edible? #t))
+  (initialize
+   (ask self 'put 'calories cal))
+  (parent (thing)))
 
 
 
