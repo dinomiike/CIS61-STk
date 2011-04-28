@@ -86,13 +86,13 @@
 
 ;; Some things.
 
-(define bagel (instantiate thing 'bagel))
+(define bagel (instantiate bagel 500))
 (ask Noahs 'appear bagel)
 
 (define coffee (instantiate thing 'coffee))
 (ask Intermezzo 'appear coffee)
 
-(define Potstickers (instantiate thing 'Potstickers))
+(define Potstickers (instantiate food 'Potstickers 600))
 (ask Kirin 'appear Potstickers)
 
 (define 3DS (instantiate thing 'Nintendo-3DS))
@@ -101,3 +101,8 @@
 (ask Dormitory 'appear MacBookPro)
 (define iPhone (instantiate thing 'iPhone))
 (ask Dormitory 'appear iPhone)
+
+(define falafel (instantiate falafel 1000))
+(ask Dormitory 'appear falafel)
+(define fries (instantiate fries 600))
+(ask Dormitory 'appear fries)

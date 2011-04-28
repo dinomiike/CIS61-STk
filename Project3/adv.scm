@@ -28,6 +28,7 @@
 	(error "Person already in this place" (list name new-person)))
     (set! people (cons new-person people))
     (for-each (lambda (proc) (proc)) entry-procs)
+    (if (
     'appeared)
   (method (gone thing)
     (if (not (memq thing things))
@@ -104,6 +105,12 @@
 	  (if (null? (ask self 'look-around)) "There is nothing to take"
 	      (filter (lambda (thing) (if (and (thing? thing) (eq? (owner thing) 'no-one)) (ask self 'take thing))) (ask (ask self 'place) 'things))))
 
+  (method (eat)
+	  (let ((items-to-eat (filter (lambda (thing) (if (ask thing 'edible?) #t #f)) (ask self 'possessions))))
+	    (let ((cal-items (map (lambda (thing) (ask thing 'calories)) items-to-eat)))
+	      (let ((total-cals (reduce + cal-items)))
+		(ask self 'put 'strength (+ (ask self 'strength) total-cals))
+		(map (lambda (thing) (ask self 'lose thing)) items-to-eat)))))
   (method (lose thing)
     (set! possessions (delete thing possessions))
     (ask thing 'change-possessor 'no-one)
@@ -134,6 +141,19 @@
   (method (person?) #t)
   (default-method
     (ask self 'get message)) )
+
+(define-class (police name place)
+  (parent (person name place))
+  (method (inspect-person p)
+	  (if (eq? (ask p 'type) 'thief) (begin
+					   (display "Crime does not pay")
+					   (map (lambda (thing) (ask self 'take thing)) (ask p 'possessions))
+					   (map (lambda (thing) (ask p 'lose item)) (ask p 'possessions)))))
+  (method (police?) #t)
+  (default-method
+    (ask self 'get message)))
+
+
 
 ;;===========================================================================
 ;; Part 1 - Problem 2F
@@ -202,7 +222,36 @@
    (edible? #t))
   (initialize
    (ask self 'put 'calories cal))
-  (parent (thing)))
+  (parent (thing name))
+  (method (food?) #t)
+  (default-method
+    (ask self 'get message)))
+
+(define-class (bagel cal)
+  (class-vars
+   (name 'bagel))
+  (parent (food name cal))
+  (method (bagel?) #t)
+  (default-method
+    (ask self 'get message)))
+
+
+(define-class (falafel cal)
+  (class-vars
+   (name 'falafel))
+  (parent (food name cal))
+  (method (falafel?) #t)
+  (default-method
+    (ask self 'get message)))
+
+(define-class (fries cal)
+  (class-vars
+   (name 'fries))
+  (parent (food name cal))
+  (method (fries?) #t)
+  (default-method
+    (ask self 'get message)))
+  
 
 
 
@@ -277,8 +326,10 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (define *foods* '(pizza potstickers coffee))
 
+;;(define (edible? thing)
+;;  (member? (ask thing 'name) *foods*))
 (define (edible? thing)
-  (member? (ask thing 'name) *foods*))
+  (ask thing 'edible?))
 
 (define-class (thief name initial-place)
   (parent (person name initial-place))
