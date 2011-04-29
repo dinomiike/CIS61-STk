@@ -1,0 +1,72 @@
+okay
+STk> (load "~/Documents/projects/CIS61-STk/Project3/adv-world2.scm")
+okay
+STk> (ask Miike 'go 'west)
+
+
+miike moved from dormitory to 61a-lab
+"The computers seem to be down"
+appeared
+STk> (ask Miike 'go 'up)
+"The workstations come back to life just in time."
+
+
+miike moved from 61a-lab to soda
+appeared
+STk> (ask Miike 'go 'north)
+
+
+miike moved from soda to kirin
+appeared
+STk> (ask Miike 'look-around)
+(potstickers)
+STk> (ask Miike 'take Potstickers)
+
+miike took potstickers
+taken
+STk> (ask Miike 'go 'south)
+
+
+miike moved from kirin to soda
+appeared
+STk> (ask Miike 'go 'up)
+
+
+miike moved from soda to art-gallery
+appeared
+STk> (ask Miike 'go 'west)
+
+
+miike moved from art-gallery to bh-office
+appeared
+STk> (ask Miike 'look-around)
+(potstickers brian)
+STk> (ask Miike 'lose Potstickers)
+lost
+STk> (ask Miike 'look-around)
+(potstickers brian)
+STk> (ask Brian 'take Potstickers)
+
+brian took potstickers
+taken
+STk> (ask Miike 'go 'east)
+"What's your favorite programming language?"
+
+Scheme
+"Good answer, but my favorite is Logo!"
+
+
+miike moved from bh-office to art-gallery
+appeared
+STk> (ask Miike 'go 'down)
+
+
+miike moved from art-gallery to soda
+appeared
+STk> (ask Miike 'go 'down)
+
+
+miike moved from soda to 61a-lab
+"The computers seem to be down"
+appeared
+STk> (transcript-off)
