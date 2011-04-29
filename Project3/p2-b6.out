@@ -1,0 +1,43 @@
+okay
+STk> (ask miike 'go-directly-to dormitory)
+
+
+miike moved from telegraph-ave to dormitory
+appeared
+STk> (ask miike 'possessions)
+(#[closure arglist=(message) 2140240])
+STk> (ask (car (ask miike 'possessions)) 'name)
+diet-coke
+STk> (ask miike 'look-around)
+(diet-coke fries falafel iphone macbookpro nintendo-3ds)
+STk> (ask miike 'take falafel)
+
+miike took falafel
+taken
+STk> (ask miike 'take fries)
+
+miike took fries
+taken
+STk> (ask falafel 'edible?)
+#t
+STk> (ask fries 'edible?)
+#t
+STk> (ask diet-coke 'edible?)
+#f
+STk> (ask miike 'strength)
+9000
+STk> (ask miike 'put 'strength 10)
+ok
+STk> (ask miike 'eat)
+(lost lost)
+STk> (ask miike 'possessions)
+(#[closure arglist=(message) 2140240])
+STk> (ask (car (ask miike 'possessions)) 'name)
+diet-coke
+STk> (ask miike 'strength)
+1610
+STk> (ask falafel 'calories)
+1000
+STk> (ask fries 'calories)
+600
+STk> (transcript-off)

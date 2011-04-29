@@ -157,6 +157,7 @@
   (initialize
    (ask self 'put 'strength 50))
   (parent (person name place))
+  (method (type) 'police)
   (method (inspect p)
 	  (if (eq? (ask p 'type) 'thief) (begin
 					   (display "Crime does not pay")

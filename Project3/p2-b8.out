@@ -1,0 +1,37 @@
+okay
+STk> (ask miike 'look-around)
+(fries falafel iphone macbookpro nintendo-3ds)
+STk> (ask miike 'take falafel)
+
+miike took falafel
+taken
+STk> (ask miike 'take iphone)
+
+miike took iphone
+taken
+STk> (ask miike 'take 3ds)
+
+miike took nintendo-3ds
+taken
+STk> (ask miike 'go-directly-to sproul-plaza)
+
+
+miike moved from dormitory to sproul-plaza
+appeared
+STk> (ask miike 'look-around)
+(falafel iphone nintendo-3ds diet-coke nasty)
+STk> (ask miike 'possessions)
+(#[closure arglist=(message) 115a980] #[closure arglist=(message) 1152b50] #[closure arglist=(message) 114e4a0])
+STk> (ask miike 'strength)
+10
+STk> (ask nasty 'strength)
+35
+STk> (ask nasty 'take 3ds)
+#[closure arglist=(message) 115a980]
+STk> (ask nasty 'take diet-coke)
+
+nasty took diet-coke
+taken
+STk> (ask miike 'take diet-coke)
+#f
+STk> (transcript-off)
