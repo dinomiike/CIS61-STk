@@ -18,6 +18,7 @@
 (define s-h (instantiate place 'sproul-hall))
 (define Kirin (instantiate place 'Kirin))
 (define Dormitory (instantiate hotspot 'Dormitory 'scoops))
+(define jail (instantiate place 'Jail))
 
 
 (can-go Soda 'up art-gallery)
@@ -57,6 +58,7 @@
 (define hacker (instantiate person 'hacker 61A-lab))
 (define nasty (instantiate thief 'nasty sproul-plaza))
 (define Miike (instantiate person 'Miike Dormitory))
+(define Kevin (instantiate police 'Kevin Telegraph-Ave))
 
 (define (sproul-hall-exit)
    (error "You can check out any time you'd like, but you can never leave"))
@@ -106,3 +108,6 @@
 (ask Dormitory 'appear falafel)
 (define fries (instantiate fries 600))
 (ask Dormitory 'appear fries)
+
+(define diet-coke (instantiate thing 'diet-coke))
+(ask Sproul-Plaza 'appear diet-coke)

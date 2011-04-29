@@ -29,7 +29,7 @@
 		(error "Person already in this place" (list name new-person)))
 	    (set! people (cons new-person people))
 	    (for-each (lambda (proc) (proc)) entry-procs)
-	    (if (< (length first-police) 0) (ask (car first-police) 'inspect new-person))
+	    (if (> (length first-police) 0) (ask (car first-police) 'inspect new-person))
 	    'appeared))
   (method (gone thing)
     (if (not (memq thing things))
@@ -86,6 +86,7 @@
 	   (error "Thing taken not at this place"
 		  (list (ask place 'name) thing)))
 	  ((memq thing possessions) (error "You already have it!"))
+	  ((not (eq? (ask thing 'possessor) 'no-one)) (ask thing 'may-take? self))
 	  (else
 	   (announce-take name thing)
 	   (set! possessions (cons thing possessions))
@@ -138,14 +139,25 @@
 	      possessions)
 	     (set! place new-place)
 	     (ask new-place 'enter self)))))
+  (method (go-directly-to new-place)
+	  (announce-move name place new-place)
+	  (for-each (lambda (p)
+		      (ask place 'gone p)
+		      (ask new-place 'appear p))
+		    possessions)
+	  (ask place 'exit self)
+	  (set! place new-place)
+	  (ask new-place 'enter self))
   ;; Problem B4B
   (method (person?) #t)
   (default-method
     (ask self 'get message)) )
 
 (define-class (police name place)
+  (initialize
+   (ask self 'put 'strength 50))
   (parent (person name place))
-  (method (inspect-person p)
+  (method (inspect p)
 	  (if (eq? (ask p 'type) 'thief) (begin
 					   (display "Crime does not pay")
 					   (map (lambda (thing) (ask self 'take thing)) (ask p 'possessions))
@@ -213,6 +225,8 @@
   (method (change-possessor new-possessor)
 	  (set! possessor new-possessor))
   (method (thing?) #t)
+  (method (may-take? receiver) (if (> (ask receiver 'strength) (ask (ask self 'possessor) 'strength)) self
+				   #f))
   (default-method
     (ask self 'get message)))
 
@@ -337,6 +351,8 @@
   (parent (person name initial-place))
   (instance-vars
    (behavior 'steal))
+  (initialize
+   (ask self 'put 'strength 35))
   (method (type) 'thief)
 
   (method (notice person)
