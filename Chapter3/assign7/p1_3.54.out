@@ -1,0 +1,23 @@
+okay
+STk> (define ones (cons-stream 1 ones))
+ones
+STk> (define (add-streams s1 s2)
+  (stream-map + s1 s2))
+add-streams
+STk> (define (mul-streams s1 s2)
+  (stream-map * s1 s2))
+mul-streams
+STk> (define factorials (cons-stream 1 (mul-streams integers factorials)))
+factorials
+STk> factorials
+
+(1 . #[promise 438140 (not forced)])
+STk> (stream-cdr factorials)
+(1 . #[promise 433a50 (not forced)])
+STk> (stream-cdr (stream-cdr factorials))
+(2 . #[promise 42d470 (not forced)])
+STk> (stream-cdr (stream-cdr (stream-cdr factorials)))
+(6 . #[promise 422e20 (not forced)])
+STk> (stream-cdr (stream-cdr (stream-cdr (stream-cdr factorials))))
+(24 . #[promise 41d0d0 (not forced)])
+STk> (transcript-off)

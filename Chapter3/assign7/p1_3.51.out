@@ -1,0 +1,30 @@
+okay
+STk> (define (display-line x)
+  (newline)
+  (display x))
+display-line
+STk> (define (show x)
+  (display-line x)
+  x)
+show
+STk> (define (show x)
+  (display-line x)
+  x)
+show
+STk> (define x (stream-map show (stream-enumerate-interval 0 10)))
+
+0x
+STk> (stream-ref x 5)
+
+1
+2
+3
+4
+55
+STk> (stream-ref x 7)
+;; It's not actually printing 55, it's just 5 twice from the way the procedures are given in the text
+
+6
+77
+;; Here too..
+STk> (transcript-off)

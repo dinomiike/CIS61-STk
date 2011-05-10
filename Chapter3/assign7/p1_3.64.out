@@ -1,0 +1,47 @@
+okay
+STk> (define (stream-limit s n)
+  (let ((p1 (stream-car s))
+	(p2 (car (stream-cdr s))))
+    (cond ((< (abs (- p1 p2)) n) p2)
+	  (else (stream-limit (stream-cdr s) n)))))
+stream-limit
+STk> (define (sqrt2 x tolerence)
+  (stream-limit (sqrt-stream x) tolerence))
+sqrt2
+STk> (define guesses
+    (cons-stream 1.0
+		 (stream-map (lambda (guess)
+			       (sqrt-improve guess x))
+			     guesses)))
+guesses
+STk> (define (sqrt-stream x)
+  (define guesses
+    (cons-stream 1.0
+		 (stream-map (lambda (guess)
+			       (sqrt-improve guess x))
+			     guesses)))
+  guesses)
+sqrt-stream
+STk> (define (sqrt-improve guess x)
+  (average guess (/ x guess)))
+sqrt-improve
+STk> (define (average x y)
+  (/ (+ x y) 2))
+average
+STk> (sqrt2 4)
+*** Error:
+    too few arguments to: (sqrt2 4)
+Current eval stack:
+__________________
+  0    (sqrt2 4)
+STk> (sqrt2 4 0.1)
+2.00060975609756
+STk> (sqrt2 8 0.1)
+2.82846857188015
+STk> (sqrt 8)
+2.82842712474619
+STk> (sqrt 15)
+3.87298334620742
+STk> (sqrt2 15 0.1)
+3.87298369800872
+STk> (transcript-off)

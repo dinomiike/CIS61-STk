@@ -1,0 +1,21 @@
+okay
+STk> (define (stream-map proc . argstreams)
+  (if (stream-null? (car argstreams))
+      the-empty-stream
+      (cons-stream
+       (apply proc (map stream-car argstreams))
+       (apply stream-map
+	      (cons proc (map stream-cdr argstreams))))))
+stream-map
+STk> integers
+
+(1 . #[promise 450800 (forced)])
+STk> (stream-cdr integers)
+(2 . #[promise 4574a0 (not forced)])
+STk> (stream-cdr (stream-cdr integers))
+(3 . #[promise 453890 (not forced)])
+STk> (stream-map + integers integers)
+(2 . #[promise 4529f0 (not forced)])
+STk> (stream-map * (stream-cdr integers) (stream-cdr integers))
+(4 . #[promise 4519f0 (not forced)])
+STk> (transcript-off)
