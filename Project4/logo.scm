@@ -73,8 +73,9 @@
 
 ;;; Problem B2   logo-pred
 
-(define (logo-pred pred)   
-  pred)      ;; This isn't written yet but we fake it for now.
+(define (logo-pred pred)
+  (lambda args (cond ((eq? (count args) 1) (pred (car args)))
+		     (else (pred (car args) (cadr args))))))
 
 
 ;;; Here is an example of a Scheme predicate that will be turned into  
