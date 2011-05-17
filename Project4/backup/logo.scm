@@ -3,15 +3,30 @@
 
 ;;; Problem A1   make-line-obj
 
+;;(define (make-line-obj text)
+;;  (instantiate line-object text))
+;;  ;;(error "make-line-obj not written yet!")) 
+
+;;(define-class (line-object)
+;;  (instance-vars (text))
+;;  (method (empty?)
+;;	  (if (null? text) #t #f))
+;;  (method (next)
+;;	  (let ((return (car text)))
+;;	    (set! text (cdr text))
+;;	    return))
+;;  (method (put-back token)
+;;	  (set! text (append token text))))
+
 (define-class (line-obj text)
   (method (empty?)
-	  (null? text))
+ (null? text))
   (method (next)
-	  (let ((first-token (car text)))
-	    (set! text (cdr text))
-	    first-token))
-  (method (put-back token)
-	  (set! text (cons token text))))
+ (let ((first-token (car text)))
+   (set! text (cdr text))
+   first-token))
+  (mehtod (put-back token)
+ (set! text (cons token text))))
   
 (define (make-line-obj text)   
   (instantiate line-obj text)) 
@@ -19,26 +34,8 @@
 
 ;;; Problem A2   logo-type
 
-(define (logo-type val)
-   (define (help val)
-     (if (ask val 'empty?)
-  '=no-value=
-  (let ((token (ask val 'next)))
-    (if (list? token)
-        (begin
-   (display "[")
-   (logo-type token)
-   (display "]")
-   (if (not (ask val 'empty?))
-       (display " "))
-   (help val))
-        (begin (display token)
-        (if (not (ask val 'empty?))
-     (display " "))
-        (help val))))))
-   (if (list? val)
-       (help (make-line-obj val))
-       (display val)))
+(define (logo-type val)   
+  (error "logo-type not written yet!")) 
 
 (define (logo-print val)   
   (logo-type val)  
@@ -52,22 +49,9 @@
 
 ;;; Problem 4   variables   (logo-meta.scm is also affected)
 
-(define (exists? input env)
-  (define (loop env)
-    (define (search inp)
-      (cond ((null? inp)
-             (loop (enclosing-environment env)))
-            ((equal? input (car inp)) #t)
-            (else (search (cdr inp)))))
-    (if (eq? env the-empty-environment)
-        #f
-        (let ((frame (first-frame env)))
-          (search (frame-variables frame)))))
-  (loop env))
-(define (make envr var value) 
-(if (exists? var envr) (set-variable-value! var value envr)
-								(define-variable! var value envr))
-					'=no-value=) 
+(define (make env var val) 
+  (error "make not written yet!") 
+  '=no-value=) 
 
 
 ;;; Here are the primitives RUN, IF, and IFELSE.  Problem B2 provides
@@ -90,8 +74,9 @@
 ;;; Problem B2   logo-pred
 
 (define (logo-pred pred)
-  (lambda args (cond ((eq? (count args) 1) (if (pred (car args)) 'true 'false))
-		     (else (if (pred (car args) (cadr args)) 'true 'false)))))
+  (lambda args (cond ((eq? (count args) 1) (pred (car args)))
+		     (else (pred (car args) (cadr args))))))
+
 
 ;;; Here is an example of a Scheme predicate that will be turned into  
 ;;; a Logo predicate by logo-pred:  
@@ -216,4 +201,4 @@
 			    the-global-environment) 
 		 (loader))))) 
   (with-input-from-file (symbol->string fn) loader)
-  '=no-value=)
+  '=no-value=) 

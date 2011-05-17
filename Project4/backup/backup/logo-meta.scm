@@ -18,12 +18,45 @@
 
 ;;; Problem B1    eval-line
 
+;;(define (eval-line line-obj env)
+;;  (cond ((null? line-obj) (logo-eval '=no-value= env))
+;;	(else
+;;	 (if (pair? line-obj) (begin
+;;				(logo-eval (car line-obj) env)
+;;				(eval-line (cdr line-obj) env))
+;;	     (logo-eval line-obj env)))))
+
+;;(define (eval-line line-obj env)
+;;  (cond ((null? line-obj) (logo-eval '=no-value= env))
+;;	(else
+;;	 (let ((hold (logo-eval line-obj env)))
+;;	   (if (not (eq? hold '=no-value=)) (begin
+;;					      (logo-eval (car line-obj) env)
+;;					      (eval-line (cdr line-obj) env))
+;;	       (logo-eval line-obj env))))))
+;;================================================
+
 (define (eval-line line-obj env)
   (if (ask line-obj 'empty?) '=no-value=
       (let ((temp (logo-eval line-obj env)))
 	(if (equal? temp '=no-value=)
 	    (eval-line line-obj env)
 	    temp))))
+
+;;  (cond ((null? line-obj) (logo-eval '=no-value= env))
+;;	(else
+;;	 (if (pair? line-obj) (begin
+;;				(logo-eval (car line-obj) env)
+;;				(eval-line (cdr line-obj) env))
+;;	     (logo-eval line-obj env)))))
+
+;;(define (eval-line line-obj env)
+;;  (cond ((null? line-obj) (logo-eval '=no-value= env)))
+;;  (let ((hold (logo-eval line-obj env)))
+;;    (if (pair? line-obj) (begin
+;;			   (logo-eval (car line-obj) env)
+;;			   (eval-line (cdr line-obj) env))
+;;	(logo-eval line-obj env))))
 
 ;;; Problem 4    variables  (other procedures must be modified, too)
 ;;; data abstraction procedures

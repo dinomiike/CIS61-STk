@@ -18,21 +18,25 @@
 
 ;;; Problem B1    eval-line
 
+;;(define (eval-line line-obj env)
+;;  (error "eval-line not written yet!"))
+
 (define (eval-line line-obj env)
-  (if (ask line-obj 'empty?) '=no-value=
-      (let ((temp (logo-eval line-obj env)))
-	(if (equal? temp '=no-value=)
-	    (eval-line line-obj env)
-	    temp))))
+  (cond ((null? line-obj) (logo-eval '=no-value= env))
+	(else
+	 (if (pair? line-obj) (begin
+				(logo-eval (car line-obj) env)
+				(eval-line (cdr line-obj) env))
+	     (logo-eval line-obj env)))))
 
 ;;; Problem 4    variables  (other procedures must be modified, too)
 ;;; data abstraction procedures
 
-(define (variable? input)
-  (eq? (first input) ':))
+(define (variable? exp)
+  #f)            ;; not written yet but we fake it for now
 
 (define (variable-name exp)
-  (bf exp))
+  (error "variable-name not written yet!"))
 
 
 ;;; Problem A5   handle-infix
@@ -79,17 +83,17 @@
 (add-prim 'last 1 last)
 (add-prim 'butlast 1 bl)
 (add-prim 'bl 1 bl)
-(add-prim 'word -2 word)
-(add-prim 'sentence -2 se)
-(add-prim 'se -2 se)
-(add-prim 'list -2 list)
+(add-prim 'word 2 word)
+(add-prim 'sentence 2 se)
+(add-prim 'se 2 se)
+(add-prim 'list 2 list)
 (add-prim 'fput 2 cons)
 
-(add-prim 'sum -2 (make-logo-arith +))
+(add-prim 'sum 2 (make-logo-arith +))
 (add-prim 'difference 2 (make-logo-arith -))
 (add-prim '=unary-minus= 1 (make-logo-arith -))
 (add-prim '- 1 (make-logo-arith -))
-(add-prim 'product -2 (make-logo-arith *))
+(add-prim 'product 2 (make-logo-arith *))
 (add-prim 'quotient 2 (make-logo-arith /))
 (add-prim 'remainder 2 (make-logo-arith remainder))
 
@@ -211,37 +215,27 @@
     (let ((token (ask line-obj 'next)))
       (cond ((self-evaluating? token) token)
             ((variable? token)
-             (lookup-variable-value (variable-name token) env))
+	     (lookup-variable-value (variable-name token) env))
             ((quoted? token) (text-of-quotation token))
             ((definition? token) (eval-definition line-obj))
-            ((left-paren? token)
-             (let ((result (handle-infix (eval-helper #t)
-                                         line-obj
-                                         env)))
-               (let ((token (ask line-obj 'next)))
-                 (if (right-paren? token)
-                     result
-                     (error "Too much inside parens")))))
-            ((right-paren? token)
-             (error "Unexpected ')'"))
+	    ((left-paren? token)
+	     (let ((result (handle-infix (eval-helper #t)
+				       	 line-obj
+				       	 env)))
+	       (let ((token (ask line-obj 'next)))
+	       	 (if (right-paren? token)
+		     result
+		     (error "Too much inside parens")))))
+	    ((right-paren? token)
+	     (error "Unexpected ')'"))
             (else
-             (let ((proc (lookup-procedure token)))
-               (if (not proc) (error "I don't know how  to " token))
-			   
-			   
-               (let ((argues '())
-                    (i (arg-count proc)))
-                 (cond ((pair? i)
-                        (set! argues 
-						(cons env (collect-n-args (car i) line-obj env))))
-                       ((and (eq? paren-flag #t) (< i 0))
-                        (set! argues (collect-n-args i line-obj env)))
-                       ((< i 0)
-                        (set! argues (collect-n-args (abs i) line-obj env)))
-                       (else (set! argues (collect-n-args i line-obj env))))
-                 (logo-apply proc argues)))) )))
-					(eval-helper #f))
-		;*****EDIT PRIMITIVE TABLE FOR WORD LIST SUM PRODUCT by adding -
+	     (let ((proc (lookup-procedure token)))
+	       (if (not proc) (error "I don't know how  to " token))
+	       (logo-apply proc
+			   (collect-n-args (arg-count proc)
+					   line-obj
+					   env) ))) )))
+  (eval-helper #f))
 
 (define (logo-apply procedure arguments)
   (cond ((primitive-procedure? procedure)

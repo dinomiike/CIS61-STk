@@ -90,8 +90,8 @@
 ;;; Problem B2   logo-pred
 
 (define (logo-pred pred)
-  (lambda args (cond ((eq? (count args) 1) (if (pred (car args)) 'true 'false))
-		     (else (if (pred (car args) (cadr args)) 'true 'false)))))
+  (lambda args (cond ((eq? (count args) 1) (pred (car args)))
+             (else (pred (car args) (cadr args))))))     
 
 ;;; Here is an example of a Scheme predicate that will be turned into  
 ;;; a Logo predicate by logo-pred:  
