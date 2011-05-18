@@ -46,8 +46,25 @@
 		      (< . lessp)
 		      (> . greaterp)))))
 
+;;(define (handle-infix value line-obj env)
+;;  value)   ;; This doesn't give an error message, so other stuff works.
 (define (handle-infix value line-obj env)
-  value)   ;; This doesn't give an error message, so other stuff works.
+  (if (ask line-obj 'empty?) value
+      (let ((token (ask line-obj 'next)))
+	(if (and (not (pair? token))
+		 (member? token '(+ - * / = < >)))
+	    (handle-infix (eval-prefix (make-line-obj (list (de-infix token) value (eval-prefix line-obj env))) env) line-obj env)
+	    (begin
+	      (ask line-obj 'put-back token)
+	      value)))))
+	;;(cond ((eq? token +) (handle-infix (apply (de-infix token) (list value (ask line-obj 'next))) line-obj env))
+	      ;;((eq? token -) (handle-infix (apply (de-infix token) (list value (ask line-obj 'next))) line-obj env))
+	      ;;((eq? token *) (handle-infix (apply (de-infix token) (list value (ask line-obj 'next))) line-obj env))
+	      ;;((eq? token /) (handle-infix (apply (de-infix token) (list value (ask line-obj 'next))) line-obj env))
+	      ;;((eq? token =) (handle-infix (apply (de-infix token) (list value (ask line-obj 'next))) line-obj env))
+	      ;;((eq? token <) (handle-infix (apply (de-infix token) (list value (ask line-obj 'next))) line-obj env))
+	      ;;((eq? token >) (handle-infix (apply (de-infix token) (list value (ask line-obj 'next))) line-obj env))
+	      ;;(else (handle-infix token line-obj env))))))
 
 
 ;;; Problem B5    eval-definition
