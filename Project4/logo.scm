@@ -20,25 +20,25 @@
 ;;; Problem A2   logo-type
 
 (define (logo-type val)
-   (define (help val)
-     (if (ask val 'empty?)
-  '=no-value=
-  (let ((token (ask val 'next)))
-    (if (list? token)
-        (begin
-   (display "[")
-   (logo-type token)
-   (display "]")
-   (if (not (ask val 'empty?))
-       (display " "))
-   (help val))
-        (begin (display token)
-        (if (not (ask val 'empty?))
-     (display " "))
-        (help val))))))
-   (if (list? val)
-       (help (make-line-obj val))
-       (display val)))
+  (define (help val)
+    (if (ask val 'empty?)
+	'=no-value=
+	(let ((token (ask val 'next)))
+	  (if (list? token)
+	      (begin
+		(display "[")
+		(logo-type token)
+		(display "]")
+		(if (not (ask val 'empty?))
+		    (display " "))
+		(help val))
+	      (begin (display token)
+		     (if (not (ask val 'empty?))
+			 (display " "))
+		     (help val))))))
+  (if (list? val)
+      (help (make-line-obj val))
+      (display val)))
 
 (define (logo-print val)   
   (logo-type val)  
@@ -89,9 +89,12 @@
 
 ;;; Problem B2   logo-pred
 
+;;(define (logo-pred pred)
+;;  (lambda args (cond ((eq? (count args) 1) (if (pred (car args)) 'true 'false))
+;;		     (else (if (pred (car args) (cadr args)) 'true 'false)))))
+
 (define (logo-pred pred)
-  (lambda args (cond ((eq? (count args) 1) (if (pred (car args)) 'true 'false))
-		     (else (if (pred (car args) (cadr args)) 'true 'false)))))
+  (lambda args (if (apply pred args) 'true 'false)))
 
 ;;; Here is an example of a Scheme predicate that will be turned into  
 ;;; a Logo predicate by logo-pred:  
@@ -99,8 +102,12 @@
 (define (equalp a b)
   (if (and (number? a) (number? b))  
       (= a b)   
-      (equal? a b)))   
+      (equal? a b)))
 
+(define (equalp4 a b c d)
+  (if (and (number? a) (number? b))
+      (= a b)
+      (equal? a b)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; 
 ;;;  Stuff below here is needed for the interpreter to work but you  ;;;  

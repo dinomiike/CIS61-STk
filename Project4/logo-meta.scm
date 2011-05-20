@@ -24,6 +24,9 @@
 	(if (equal? temp '=no-value=)
 	    (eval-line line-obj env)
 	    temp))))
+;; if you get no-value should end there, check more for case where it doesn't work, (ie. examine temp is not eq to no-val)
+;; --to process multiple statements on one line, you look for the no-value response and recurse when you get it
+;; --if it's empty beyond that, you return no-value and stop, otherwise you keep going until you reach the empty line-obj
 
 ;;; Problem 4    variables  (other procedures must be modified, too)
 ;;; data abstraction procedures
@@ -57,21 +60,48 @@
 	    (begin
 	      (ask line-obj 'put-back token)
 	      value)))))
-	;;(cond ((eq? token +) (handle-infix (apply (de-infix token) (list value (ask line-obj 'next))) line-obj env))
-	      ;;((eq? token -) (handle-infix (apply (de-infix token) (list value (ask line-obj 'next))) line-obj env))
-	      ;;((eq? token *) (handle-infix (apply (de-infix token) (list value (ask line-obj 'next))) line-obj env))
-	      ;;((eq? token /) (handle-infix (apply (de-infix token) (list value (ask line-obj 'next))) line-obj env))
-	      ;;((eq? token =) (handle-infix (apply (de-infix token) (list value (ask line-obj 'next))) line-obj env))
-	      ;;((eq? token <) (handle-infix (apply (de-infix token) (list value (ask line-obj 'next))) line-obj env))
-	      ;;((eq? token >) (handle-infix (apply (de-infix token) (list value (ask line-obj 'next))) line-obj env))
-	      ;;(else (handle-infix token line-obj env))))))
 
 
 ;;; Problem B5    eval-definition
 
-(define (eval-definition line-obj)
-  (error "eval-definition not written yet!"))
-
+;;(define (eval-definition line-obj)
+;;  (error "eval-definition not written yet!"))
+(define (eval-definition line-obj env)
+  (define (formal-args lst)
+    (if (ask line-obj 'empty?) lst
+	(let ((next (ask line-obj 'next)))
+	  (if (eq? next 'static) lst
+	      (begin
+		(ask line-obj 'put-back next)
+		(formal-args (append lst (list (variable-name (ask line-obj 'next))))) )))))
+  (define (static-vars lst)
+    (if (ask line-obj 'empty?) lst
+	(static-vars (cons (cons (variable-name (ask line-obj 'next))
+				 (logo-eval line-obj env))
+			   lst))))
+  (define (end? line)
+    (and (not (null? line))
+         (eq? (car line) 'end)
+         (null? (cdr line))))
+  (define (proc-loop body)
+    (prompt "-> ")
+    (let ((line (logo-read)))
+      (if (end? line)
+          (let ((name (ask line-obj 'next))
+                (formals (formal-args '()))
+		(statics (static-vars '())))
+	    (add-proc (make-proc name
+				 (length formals)
+				 formals
+				 body
+				 (make-frame
+				  (map car statics)
+				  (map cdr statics))))
+	    (logo-print (word name " defined")))
+          (proc-loop (append body (list line))))))
+  (if (ask line-obj 'empty?) (error "to: no procedure name given")
+      (proc-loop '()))
+  '=NO-VALUE=)
 
 ;;; Problem 6    eval-sequence
 
@@ -119,7 +149,8 @@
 (add-prim 'run '(1) run)
 (add-prim 'if '(2) logo-if)
 (add-prim 'ifelse '(3) ifelse)
-(add-prim 'equalp 2 (logo-pred (make-logo-arith equalp)))
+(add-prim 'equalp -2 (logo-pred (make-logo-arith equalp)))
+(add-prim 'equalp4 4 (logo-pred (make-logo-arith equalp4)))
 (add-prim 'lessp 2 (logo-pred (make-logo-arith <)))
 (add-prim 'greaterp 2 (logo-pred (make-logo-arith >)))
 (add-prim 'emptyp 1 (logo-pred empty?))
