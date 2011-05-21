@@ -66,56 +66,65 @@
 
 ;;(define (eval-definition line-obj)
 ;;  (error "eval-definition not written yet!"))
+;;(define (eval-definition line-obj)
+;;  (define (formal-args lst)
+;;    (if (ask line-obj 'empty?) lst
+;;	(let ((next (ask line-obj 'next)))
+;;	  (if (eq? next 'static) lst
+;;	      (begin
+;;		(ask line-obj 'put-back next)
+;;		(formal-args (append lst (list (variable-name (ask line-obj 'next))))) )))))
+;;  (define (static-vars lst)
+;;    (if (ask line-obj 'empty?) lst
+;;	(static-vars (cons (cons (variable-name (ask line-obj 'next))
+;;				 (logo-eval line-obj env))
+;;			   lst))))
+;;  (define (end? line)
+;;    (and (not (null? line))
+;;         (eq? (car line) 'end)
+;;         (null? (cdr line))))
+;;  (define (proc-loop body)
+;;    (prompt "-> ")
+;;    (let ((line (logo-read)))
+;;      (if (end? line)
+;;          (let ((name (ask line-obj 'next))
+;;                (formals (formal-args '()))
+;;		(statics (static-vars '())))
+;;	    (add-proc (make-proc name
+;;				 (length formals)
+;;				 formals
+;;				 body
+;;				 (make-frame
+;;				  (map car statics)
+;;				  (map cdr statics))))
+;;	    (logo-print (word name " defined")))
+;;          (proc-loop (append body (list line))))))
+;;  (if (ask line-obj 'empty?) (error "to: no procedure name given")
+;;      (proc-loop '()))
+;;  '=no-value=)
+
+;;(define (procedure-frame proc) (list-ref proc 5))
+
+;;(define (make-proc name argc formals body frame)
+;;  (list name
+;;	'compound
+;;	argc
+;;	(cons formals body)
+;;	#f
+;;	frame))
+
+;;(define (add-proc proc)
+;;  (set! the-procedures
+;;	(cons proc the-procedures)))
+
 (define (eval-definition line-obj)
-  (define (formal-args lst)
-    (if (ask line-obj 'empty?) lst
-	(let ((next (ask line-obj 'next)))
-	  (if (eq? next 'static) lst
-	      (begin
-		(ask line-obj 'put-back next)
-		(formal-args (append lst (list (variable-name (ask line-obj 'next))))) )))))
-  (define (static-vars lst)
-    (if (ask line-obj 'empty?) lst
-	(static-vars (cons (cons (variable-name (ask line-obj 'next))
-				 (logo-eval line-obj env))
-			   lst))))
-  (define (end? line)
-    (and (not (null? line))
-         (eq? (car line) 'end)
-         (null? (cdr line))))
   (define (proc-loop body)
     (prompt "-> ")
     (let ((line (logo-read)))
-      (if (end? line)
-          (let ((name (ask line-obj 'next))
-                (formals (formal-args '()))
-		(statics (static-vars '())))
-	    (add-proc (make-proc name
-				 (length formals)
-				 formals
-				 body
-				 (make-frame
-				  (map car statics)
-				  (map cdr statics))))
-	    (logo-print (word name " defined")))
-          (proc-loop (append body (list line))))))
+      (logo-print (ask line-obj 'next))))
   (if (ask line-obj 'empty?) (error "to: no procedure name given")
       (proc-loop '()))
   '=no-value=)
-
-(define (procedure-frame proc) (list-ref proc 5))
-
-(define (make-proc name argc formals body frame)
-  (list name
-	'compound ;; Applies only to user-defined functions (obviously)
-	argc ;; The argment names for the procedure
-	(cons formals body) ;; The body of the procedure
-	#f ;; The step-flag, by default set to false
-	frame))
-
-(define (add-proc proc)
-  (set! the-procedures
-	(cons proc the-procedures)))
 
 ;;(define (eval-definition line-obj)
 ;;  (define (formal-para)
@@ -132,50 +141,22 @@
 ;;      (let ((line (logo-read)))
 ;;	(if (equal? line '(END))
 ;;	    '()
-;;	    (cons line (body)))))
-;;    (let ((name (ask line-obj 'next)))
-;;      (let ((formals (formal-para)))
-;;	(set! proc (cons (list name 'compound (length formals)
-;;			       (cons formals (body)))
-;;			 proc))))
-;;    '=no-value=))
+;;	    (cons line (body))))))
+;;  (let ((name (ask line-obj 'next)))
+;;    (let ((formals (formal-para)))
+;;      (set! proc (cons (list name 'compound (length formals)
+;;			     (cons formals (body)))
+;;		       proc))))
+;;  '=no-value=)
 
 ;;; Problem 6    eval-sequence
 
-;;(define (eval-sequence exps env)
-;;  (define tempval (eval-line (make-line-obj (car exps)) env))
-;;  (cond ((null? exps) '=no-value=)
-;;	((and (pair? tempval) (eq? (car tempval) '=output=)) (cdr tempval))
-;;	((eq? tempval '=stop=) '=no-value=)
-;;	((not (eq? tempval '=no-value=))
-;;	 (error "You don't say what to do with" tempval))
-;;	(else (eval-sequence (cdr exps) env))))
+(define (eval-sequence exps env)
+  (error "eval-sequence not written yet!"))
 
-(define (eval-sequence exps env stp)
-  (cond ((null? exps) '=no-value=)
-	((not (null? exps))
-	 (if (equal? stp #t) (begin
-		     (logo-type (car exps))
-		     (prompt ">>> ")
-		     (logo-read)))
-	 (let ((tempval (eval-line (make-line-obj (car exps)) env)))
-	   (cond
-	    ((and (pair? tempval) (eq? (car tempval) '=output=)) (cdr tempval))
-	    ((eq? tempval '=stop=) '=no-value=)
-	    ((not (eq? tempval '=no-value=))
-	     (error "You don't say what to do with" tempval))
-	    (else (eval-sequence (cdr exps) env stp)))))))
 
-(define (step proc-name)
-  (let ((prc (lookup-procedure proc-name)))
-    (if (compound-procedure? prc) (set-car! (step-flag prc) #t))
-    '=no-value=))
 
-(define (unstep proc-name)
-  (let ((prc (lookup-procedure proc-name)))
-    (if (compound-procedure? prc) (set-car! (step-flag prc) #f))
-    '=no-value=))
-
+
 ;;; SETTING UP THE ENVIRONMENT
 
 (define the-primitive-procedures '())
@@ -226,8 +207,6 @@
 (add-prim 'stop 0 (lambda () '=stop=))
 (add-prim 'output 1 (lambda (x) (cons '=output= x)))
 (add-prim 'op 1 (lambda (x) (cons '=output= x)))
-(add-prim 'step 1 step)
-(add-prim 'unstep 1 unstep)
 
 (define (pcmd proc) (lambda args (apply proc args) '=no-value=))
 (add-prim 'cs 0 (pcmd cs))
@@ -345,30 +324,27 @@
 			   
 			   
                (let ((argues '())
-		     (i (arg-count proc)))
+                    (i (arg-count proc)))
                  (cond ((pair? i)
                         (set! argues 
-			      (cons env (collect-n-args (car i) line-obj env))))
+						(cons env (collect-n-args (car i) line-obj env))))
                        ((and (eq? paren-flag #t) (< i 0))
                         (set! argues (collect-n-args i line-obj env)))
                        ((< i 0)
                         (set! argues (collect-n-args (abs i) line-obj env)))
                        (else (set! argues (collect-n-args i line-obj env))))
-                 (logo-apply proc argues env)))) )))
-  (eval-helper #f))
-;*****EDIT PRIMITIVE TABLE FOR WORD LIST SUM PRODUCT by adding -
-(define (logo-apply procedure arguments env)
+                 (logo-apply proc argues)))) )))
+					(eval-helper #f))
+		;*****EDIT PRIMITIVE TABLE FOR WORD LIST SUM PRODUCT by adding -
+
+(define (logo-apply procedure arguments)
   (cond ((primitive-procedure? procedure)
          (apply-primitive-procedure procedure arguments))
         ((compound-procedure? procedure)
-	 (eval-sequence
-	  (procedure-body procedure)
-	  (extend-environment (parameters procedure) arguments env)
-	  (step? procedure)))
+	 (error "Compound procedures not implemented yet."))
         (else
          (error "Unknown procedure type -- LOGO-APPLY " procedure))))
 
-		 
 (define (collect-n-args n line-obj env)
   (cond ((= n 0) '())
 	((and (< n 0) (not (ask line-obj 'empty?)))
@@ -432,12 +408,6 @@
 (define (parameters proc) (car (text proc)))
 
 (define (procedure-body proc) (cdr (text proc)))
-
-(define (step-flag p)
-  (cddddr p))
-
-(define (step? p)
-  (car (step-flag p)))
 
 ;;; Section 4.1.3
 
