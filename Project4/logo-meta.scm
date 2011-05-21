@@ -66,7 +66,7 @@
 
 ;;(define (eval-definition line-obj)
 ;;  (error "eval-definition not written yet!"))
-(define (eval-definition line-obj env)
+(define (eval-definition line-obj)
   (define (formal-args lst)
     (if (ask line-obj 'empty?) lst
 	(let ((next (ask line-obj 'next)))
@@ -101,7 +101,44 @@
           (proc-loop (append body (list line))))))
   (if (ask line-obj 'empty?) (error "to: no procedure name given")
       (proc-loop '()))
-  '=NO-VALUE=)
+  '=no-value=)
+
+(define (procedure-frame proc) (list-ref proc 5))
+
+(define (make-proc name argc formals body frame)
+  (list name
+	'compound
+	argc
+	(cons formals body)
+	#f
+	frame))
+
+(define (add-proc proc)
+  (set! the-procedures
+	(cons proc the-procedures)))
+
+;;(define (eval-definition line-obj)
+;;  (define (formal-para)
+;;    (define (check token)
+;;      (if (eq? (first token) ':)
+;;	  (bf token)
+;;	  (error "Bad input")))
+;;    (if (ask line-obj 'empty?)
+;;	'()
+;;	(let ((token (ask line-obj 'next)))
+;;	  (cons (check token) (formal-para))))
+;;    (define (body)
+;;      (prompt "-> ")
+;;      (let ((line (logo-read)))
+;;	(if (equal? line '(END))
+;;	    '()
+;;	    (cons line (body)))))
+;;    (let ((name (ask line-obj 'next)))
+;;      (let ((formals (formal-para)))
+;;	(set! proc (cons (list name 'compound (length formals)
+;;			       (cons formals (body)))
+;;			 proc))))
+;;    '=no-value=))
 
 ;;; Problem 6    eval-sequence
 
