@@ -268,10 +268,16 @@
 (add-prim 'setbg 1 (pcmd setbg))
 (add-prim 'setbackground 1 (pcmd setbg))
 
+(add-prim 'test '(1) test)
+(add-prim 'iftrue '(1) iftrue)
+(add-prim 'iffalse '(1) iffalse)
+
 (add-prim 'load 1 meta-load)
 
 (define the-global-environment '())
 (define the-procedures the-primitive-procedures)
+
+
 
 ;;; INITIALIZATION AND DRIVER LOOP
 

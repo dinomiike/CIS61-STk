@@ -86,6 +86,29 @@
         ((eq? t/f 'false) (eval-line (make-line-obj exp2) env))   
         (else (error "Input to IFELSE not true or false " t/f))))  
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(define (test env bool)
+  (cond ((eq? bool 'true) (define-variable! " test" env bool))
+	((eq? bool 'false) (define-variable! " test" env bool))
+	(else
+	 (error "Test requires true or false value. Supplied: " bool))))
+
+(define (iftrue env instr)
+  (cond ((eq? (lookup-variable-value " test" env) 'true)
+	 (eval-line (make-line-obj instr) env))
+	((eq (lookup-variable-value " test" env) 'false)
+	 '=no-value=)
+	(else
+	 (error "Iftrue used before test"))))
+
+(define (iffalse env instr)
+  (cond ((eq? (lookup-variable-value " test" env) 'false)
+	 (eval-line (make-line-obj instr) env))
+	((eq? (lookup-variable-value " test" env) 'true)
+	 '=no-value=)
+	(else
+	 (error "Iffalse used before test"))))
 
 ;;; Problem B2   logo-pred
 
