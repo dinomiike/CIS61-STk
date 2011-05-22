@@ -87,17 +87,21 @@
         (else (error "Input to IFELSE not true or false " t/f))))  
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-(define (test env bool)
-  (cond ((eq? bool 'true) (define-variable! " test" env bool))
-	((eq? bool 'false) (define-variable! " test" env bool))
+;; cer (condition evaluation result)
+(define (test env cer)
+  (cond ((eq? cer 'true)
+	 (set-variable-value! " test" cer env)
+	 '=no-value=)
+	((eq? cer 'false)
+	 (set-variable-value! " test" cer env)
+	 '=no-value=)
 	(else
-	 (error "Test requires true or false value. Supplied: " bool))))
+	 (error "Test requires true or false value. Supplied: " cer))))
 
 (define (iftrue env instr)
   (cond ((eq? (lookup-variable-value " test" env) 'true)
 	 (eval-line (make-line-obj instr) env))
-	((eq (lookup-variable-value " test" env) 'false)
+	((eq? (lookup-variable-value " test" env) 'false)
 	 '=no-value=)
 	(else
 	 (error "Iftrue used before test"))))

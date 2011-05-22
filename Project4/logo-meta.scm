@@ -455,8 +455,13 @@
 
 (define the-empty-environment '())
 
+;;(define (make-frame variables values)
+;;  (cons variables values))
+;; Problem 12, inserting " test" value to every frame
 (define (make-frame variables values)
-  (cons variables values))
+  (cons
+   (cons '" test" variables)
+   (cons 'nil values)))
 
 (define (frame-variables frame) (car frame))
 (define (frame-values frame) (cdr frame))
