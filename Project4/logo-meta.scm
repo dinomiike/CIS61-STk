@@ -369,7 +369,11 @@
         ((compound-procedure? procedure)
 	 (eval-sequence
 	  (procedure-body procedure)
-	  (extend-environment (parameters procedure) arguments env)
+	  (extend-environment
+	   (frame-variables (static-frame procedure))
+	   (frame-values (static-frame procedure))
+	   (extend-environment
+	    (parameters procedure) arguments env))
 	  (step? procedure)))
         (else
          (error "Unknown procedure type -- LOGO-APPLY " procedure))))
@@ -444,6 +448,10 @@
 
 (define (step? p)
   (car (step-flag p)))
+
+;; Access to the static variables set in the frame
+(define (static-frame p)
+  (cddddr p))
 
 ;;; Section 4.1.3
 
