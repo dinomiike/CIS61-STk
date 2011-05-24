@@ -24,6 +24,9 @@
 	(if (equal? temp '=no-value=)
 	    (eval-line line-obj env)
 	    temp))))
+;; if you get no-value should end there, check more for case where it doesn't work, (ie. examine temp is not eq to no-val)
+;; --to process multiple statements on one line, you look for the no-value response and recurse when you get it
+;; --if it's empty beyond that, you return no-value and stop, otherwise you keep going until you reach the empty line-obj
 
 ;;; Problem 4    variables  (other procedures must be modified, too)
 ;;; data abstraction procedures
@@ -100,8 +103,8 @@
 (define (eval-definition line-obj)
   (define (list-para)
     (if (ask line-obj 'empty?)
-            '()
-            (let ((para (ask line-obj 'next)))
+	'()
+	(let ((para (ask line-obj 'next)))
           (if (eq? para 'static)
               '()
               (append (list (bf para)) (list-para))))))
@@ -117,7 +120,7 @@
     (if (ask line-obj 'empty?)
         frame
         (let ((var (bf (ask line-obj 'next)))
-               (val (logo-eval line-obj the-global-environment)))
+	      (val (logo-eval line-obj the-global-environment)))
           (add-binding-to-frame! var val frame)
           (get-statics frame))))
   (let ((name (ask line-obj 'next))
@@ -125,10 +128,9 @@
         (body (interactive-loop))
         (statics (get-statics (make-frame '() '()))))
     (set! the-procedures
-          (cons (list name 'compound (length formals) (cons formals body) statics)
+          (cons (list name 'compound (list (length formals)) (cons formals body) #f statics)
                 the-procedures))
     '=no-value=))
-	;______________________________________________________________
 
 (define (procedure-frame proc) (list-ref proc 5))
 
@@ -242,7 +244,6 @@
 (add-prim 'if '(2) logo-if)
 (add-prim 'ifelse '(3) ifelse)
 (add-prim 'equalp -2 (logo-pred (make-logo-arith equalp)))
-(add-prim 'equalp3 3 (logo-pred (make-logo-arith equalp3)))
 (add-prim 'equalp4 4 (logo-pred (make-logo-arith equalp4)))
 (add-prim 'lessp 2 (logo-pred (make-logo-arith <)))
 (add-prim 'greaterp 2 (logo-pred (make-logo-arith >)))
@@ -427,6 +428,30 @@
 ;;	 (else
 ;;	  (error "Unknown procedure type -- LOGO-APPLY " procedure)))))
 
+(define (logo-apply procedure arguments env)
+  (cond ((primitive-procedure? procedure)
+         (apply-primitive-procedure procedure arguments))
+        ((compound-procedure? procedure)
+         (let ((body (procedure-body procedure))
+               (formals (parameters procedure))
+               (args (cdr arguments))
+               (env (car arguments))
+               (static-vars (frame-variables (static-frame procedure)))
+               (static-vals (frame-values (static-frame procedure))))
+           (eval-sequence
+             body
+             (extend-environment
+               static-vars
+               static-vals
+               (extend-environment
+                 formals
+                 args
+                 env))
+             (stepped-proc? procedure))))
+        (else
+         (error "Unknown procedure type -- LOGO-APPLY " procedure))))
+
+;;
 ;;(define (logo-apply procedure arguments env)
 ;;  (cond ((primitive-procedure? procedure)
 ;;         (apply-primitive-procedure procedure arguments))
@@ -439,45 +464,20 @@
 ;;               (static-vals (frame-values (static-frame procedure))))
 ;;           (eval-sequence
 ;;             body
-;;             (extend-environment
-;;               static-vars
-;;               static-vals
-;;               (extend-environment
-;;                 formals
-;;                 args
-;;                 env))
+;;	     (extend-environment
+;;	      formals
+;;	      args
+;;	      (cons (static-frame procedure) env))
+;;             ;;(extend-environment
+;;               ;;static-vars
+;;               ;;static-vals
+;;               ;;(extend-environment
+;;                 ;;formals
+;;                 ;;args
+;;                 ;;env))
 ;;             (stepped-proc? procedure))))
 ;;        (else
 ;;         (error "Unknown procedure type -- LOGO-APPLY " procedure))))
-
-;;
-(define (logo-apply procedure arguments env)
-  
-	(cond ((primitive-procedure? procedure)
-    
-	     (apply-primitive-procedure procedure arguments))
-     
-   ((compound-procedure? procedure)
-			
-	(eval-sequence (procedure-body procedure)
-				
-			(extend-environment (parameters procedure) arguments 
-						(cons (static-frame procedure) env)
-			 )
-(step? procedure) 
-	)
-     )
-
- (else
-         (error "Unknown procedure type -- LOGO-APPLY " procedure))))
-
-(define (static-frame p)
-  (car (cddddr p)))
-		 
-		 
-		 
-		 
-		 
 
 (define (collect-n-args n line-obj env)
   (cond ((= n 0) '())

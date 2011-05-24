@@ -65,9 +65,9 @@
           (search (frame-variables frame)))))
   (loop env))
 (define (make envr var value) 
-(if (exists? var envr) (set-variable-value! var value envr)
-								(define-variable! var value envr))
-					'=no-value=) 
+  (if (exists? var envr) (set-variable-value! var value envr)
+      (define-variable! var value envr))
+  '=no-value=) 
 
 
 ;;; Here are the primitives RUN, IF, and IFELSE.  Problem B2 provides
@@ -128,7 +128,12 @@
 
 (define (equalp a b)
   (if (and (number? a) (number? b))  
-      (= a b)   
+      (= a b)
+      (equal? a b)))
+
+(define (equalp3 a b c)
+  (if (and (number? a) (number? b))
+      (= a b)
       (equal? a b)))
 
 (define (equalp4 a b c d)
