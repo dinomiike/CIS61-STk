@@ -255,7 +255,7 @@
       	       (let ((next (logo-eval line-obj env)))
         	 (cons next
 	      	       (collect-n-args (- n 1) line-obj env)) ))))
-	(else      
+	(else
       	 (let ((next (logo-eval line-obj env)))
            (cons next
 	      	 (collect-n-args (- n 1) line-obj env)) ))))

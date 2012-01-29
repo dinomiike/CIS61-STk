@@ -5,8 +5,8 @@ The expression is evaluated as:
 STk> (first (bf ''''quote))
 (quote (quote quote))
 
-Quote is used to evaluate the argument as a literal term. 
-Quote (or ') is required to use the word "quote" in your expression without the interpreter evaluating it, 
+Quote is used to evaluate the argument as a literal term.
+Quote (or ') is required to use the word "quote" in your expression without the interpreter evaluating it,
 like using quotation marks around a word or phrase to translate their literal meaning.
 
 ''''quote returns:

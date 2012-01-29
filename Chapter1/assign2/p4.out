@@ -24,6 +24,6 @@ What happens if we (perversely) ask the interpreter to evaluate the combination 
 ===========================================================
 
 The procedure f takes a procedure and applies it to the number 2. If the procedure can't do anything with 2, it results in an error.
-You might think it would loop infinitely, but since (f 2) doesn't do anything itself, it cannot successfuly recurse itself, so you 
+You might think it would loop infinitely, but since (f 2) doesn't do anything itself, it cannot successfuly recurse itself, so you
 will see an error stating bad function. (I cheated and ran the function through the interpreter...)
 Basically, with (f f) you are trying to apply a non-procedure to a number which results in an error called "bad function".

@@ -7,7 +7,7 @@ STk> (square 5)
 25
 STk> (newtons-method (cubic 0.1 -2.2 5.9) 1)
 -2.2472542280837
-STk> 
+STk>
 ()
 ()
 STk> (transcript-off)

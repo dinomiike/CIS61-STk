@@ -14,7 +14,7 @@
     (make-segment (make-vect 0.879 0.014) (make-vect 0.891 0.018))
     (make-segment (make-vect 0.891 0.018) (make-vect 0.901 0.036))
     (make-segment (make-vect 0.901 0.036) (make-vect 0.927 0.02))
-    (make-segment (make-vect 0.927 0.02) (make-vect 0.931 0.014))   
+    (make-segment (make-vect 0.927 0.02) (make-vect 0.931 0.014))
     (make-segment (make-vect 0.931 0.014) (make-vect 0.943 0.016))
     (make-segment (make-vect 0.943 0.016) (make-vect 0.947 0.024))
     (make-segment (make-vect 0.947 0.024) (make-vect 0.945 0.052))

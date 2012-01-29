@@ -38,13 +38,13 @@
   (method (gone thing)
     (if (not (memq thing things))
 	(error "Disappearing thing not here" (list name thing)))
-    (set! things (delete thing things)) 
+    (set! things (delete thing things))
     'disappeared)
   (method (exit person)
     (for-each (lambda (proc) (proc)) exit-procs)
     (if (not (memq person people))
 	(error "Disappearing person not here" (list name person)))
-    (set! people (delete person people)) 
+    (set! people (delete person people))
     'disappeared)
   ;; Problem B4B
   (method (place?) #t)
@@ -99,7 +99,7 @@
 	  ((not (eq? (ask thing 'possessor) 'no-one)) (ask thing 'may-take? self))
 	  (else
 	   (announce-take name thing)
-	   (set! possessions (cons thing possessions)) 
+	   (set! possessions (cons thing possessions))
 	   ;; If somebody already has this object...
 	   (for-each
 	    (lambda (pers)
@@ -302,7 +302,7 @@
 	'no-one
 	(ask obj 'name))))
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-  
+
 (define (reload-me)
 (define Miike (instantiate person 'Miike Dormitory)))
 
@@ -382,7 +382,7 @@
 	  (insert! property value properties))
   (method (get property)
 	  (lookup property properties)))
-        
+
 (define-class (hotspot name pass)
   (instance-vars
    (password pass)
@@ -404,8 +404,8 @@
 	      (error "You are not connected to the network")))
   (default-method
     (ask self 'get message)))
-    
-    
+
+
 (define-class (laptop name)
   (parent (thing name))
   (method (laptop?) #t)
@@ -440,7 +440,7 @@
    (ask self 'put 'strength 35))
   (method (type) 'thief)
   (method (notice person)
-    (if (eq? behavior 'run) 
+    (if (eq? behavior 'run)
 ;;;;;;;; Problem A6b ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
     (let ((exits (ask (usual 'place) 'exits)))
       (if (not (null? exits))
