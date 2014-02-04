@@ -260,12 +260,12 @@
             (else
              (let ((proc (lookup-procedure token)))
                (if (not proc) (error "I don't know how  to " token))
-			   
-			   
+
+
                (let ((argues '())
                     (i (arg-count proc)))
                  (cond ((pair? i)
-                        (set! argues 
+                        (set! argues
 						(cons env (collect-n-args (car i) line-obj env))))
                        ((and (eq? paren-flag #t) (< i 0))
                         (set! argues (collect-n-args i line-obj env)))
@@ -294,7 +294,7 @@
       	       (let ((next (logo-eval line-obj env)))
         	 (cons next
 	      	       (collect-n-args (- n 1) line-obj env)) ))))
-	(else      
+	(else
       	 (let ((next (logo-eval line-obj env)))
            (cons next
 	      	 (collect-n-args (- n 1) line-obj env)) ))))

@@ -72,7 +72,7 @@
 	   (make-segment (make-vect 0.875 0) (make-vect 1 0.25))
 	   (make-segment (make-vect 0.9375 0) (make-vect 1 0.125))))
     (cons 'yellow
-	  (list	       	   	   
+	  (list
 	   (make-segment (make-vect 1 1) (make-vect 0.75 0.625))
 	   (make-segment (make-vect 0.75 0.625) (make-vect 0.375 0.4375))
 	   (make-segment (make-vect 0.375 0.4375) (make-vect 0.25 0.4375))
@@ -108,7 +108,7 @@
 	   (make-segment (make-vect 0.875 0.875) (make-vect 1 0.75))
 	   (make-segment (make-vect 0.9375 0.9375) (make-vect 1 0.875))))
     (cons 'yellow
-	  (list	   
+	  (list
 	   (make-segment (make-vect 0 1) (make-vect 0.125 0.75))
 	   (make-segment (make-vect 0.125 0.75) (make-vect 0.5 0.5))
 	   (make-segment (make-vect 0.5 0.5) (make-vect 0.875 0.375))
@@ -180,7 +180,7 @@
 
 (define corner3 (quartet corner2 side2 (rotate90 side2) (rotate90 fish1)))
 
-(define escher-fish (cycle corner3))  
+(define escher-fish (cycle corner3))
 
 (define (draw-escher-fish)
   (escher-fish (make-frame (make-vect -0.8 -0.8)

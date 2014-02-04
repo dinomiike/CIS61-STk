@@ -5,7 +5,7 @@
 
 ;;; Utilities
 
-;; MAKNAM: create a new symbol whose name is the concatenation of the 
+;; MAKNAM: create a new symbol whose name is the concatenation of the
 ;; names of those in the symbol list SYMBOLS.
 (define (maknam . symbols)
   (string->symbol (apply string-append (map symbol->string symbols))))
@@ -118,7 +118,7 @@
 	 (error "Each argument to define-class must be a list"))
 	((not (null? (extra-clauses form)))
 	 (error "Unrecognized clause in define-class:" (extra-clauses form)))
-	(else 
+	(else
 	 `(define ,(class-name form)
 	    (let ,(class-var-bindings form)
 	      (lambda (class-message)

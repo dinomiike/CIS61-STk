@@ -285,8 +285,8 @@
 		      ;;(make-segment (make-vect 0.65 1) (make-vect 0.65 0))
 		      ;;(make-segment (make-vect 0.4 1) (make-vect 0.4 0))
 		      ;;(make-segment (make-vect 0.6 1) (make-vect 0.6 0))
-		      ;; Body Line 
-		      ;;(make-segment (make-vect 0 0.6) (make-vect 1 0.6)) 
+		      ;; Body Line
+		      ;;(make-segment (make-vect 0 0.6) (make-vect 1 0.6))
 		      )))
 
 (define draw-base (segments->painter
@@ -453,7 +453,7 @@
 		    (make-segment (make-vect 0.4925 0.4497) (make-vect 0.5162 0.4282))
 		    (make-segment (make-vect 0.5162 0.4282) (make-vect 0.5324 0.4774))
 		    (make-segment (make-vect 0.5324 0.4774) (make-vect 0.5573 0.4497))
-		    
+
 		    ;; Eye
 		    (make-segment (make-vect 0.6042 0.8134) (make-vect 0.585 0.7928))
 		    (make-segment (make-vect 0.585 0.7928) (make-vect 0.5877 0.7752))
@@ -515,7 +515,7 @@
 		    (make-segment (make-vect 0.4766 0.737) (make-vect 0.4818 0.7127))
 		    (make-segment (make-vect 0.4818 0.7127) (make-vect 0.487 0.6484))
 		    (make-segment (make-vect 0.487 0.6484) (make-vect 0.4722 0.6068))
-		    
+
 		    (make-segment (make-vect 0.4766 0.737) (make-vect 0.4653 0.7413))
 		    (make-segment (make-vect 0.4653 0.7413) (make-vect 0.4514 0.7335))
 		    (make-segment (make-vect 0.4514 0.7335) (make-vect 0.4392 0.7231))
@@ -523,7 +523,7 @@
 		    (make-segment (make-vect 0.4436 0.691) (make-vect 0.447 0.6493))
 		    (make-segment (make-vect 0.447 0.6493) (make-vect 0.4462 0.6163))
 		    (make-segment (make-vect 0.4462 0.6163) (make-vect 0.4323 0.599))
-		    
+
 		    (make-segment (make-vect 0.4392 0.7231) (make-vect 0.4253 0.724))
 		    (make-segment (make-vect 0.4253 0.724) (make-vect 0.4149 0.7188))
 		    (make-segment (make-vect 0.4149 0.7188) (make-vect 0.4002 0.7179))
@@ -532,17 +532,17 @@
 		    (make-segment (make-vect 0.3837 0.684) (make-vect 0.3872 0.6623))
 		    (make-segment (make-vect 0.3872 0.6623) (make-vect 0.3793 0.6137))
 		    (make-segment (make-vect 0.3793 0.6137) (make-vect 0.375 0.6007))
-		    
+
 		    (make-segment (make-vect 0.3854 0.6997) (make-vect 0.3715 0.6936))
 		    (make-segment (make-vect 0.3715 0.6936) (make-vect 0.349 0.6788))
-		    
+
 		    ;; Inner eye
 		    (make-segment (make-vect 0.6155 0.8099) (make-vect 0.605 0.803))
 		    (make-segment (make-vect 0.605 0.803) (make-vect 0.5981 0.7891))
 		    (make-segment (make-vect 0.5981 0.7891) (make-vect 0.5972 0.7804))
 		    (make-segment (make-vect 0.5972 0.7804) (make-vect 0.6016 0.7708))
 		    (make-segment (make-vect 0.6016 0.7708) (make-vect 0.6089 0.7643))
-		    
+
 		    ;; Under eye
 		    (make-segment (make-vect 0.5851 0.7917) (make-vect 0.5668 0.7769))
 		    (make-segment (make-vect 0.5668 0.7769) (make-vect 0.5591 0.7649))
@@ -556,7 +556,7 @@
 		    (make-segment (make-vect 0.7352 0.592) (make-vect 0.7587 0.6102))
 		    (make-segment (make-vect 0.7587 0.6102) (make-vect 0.7743 0.6424))
 		    (make-segment (make-vect 0.7743 0.6424) (make-vect 0.7977 0.6892))
-		    
+
 		    (make-segment (make-vect 0.5477 0.7387) (make-vect 0.553 0.7205))
 		    (make-segment (make-vect 0.553 0.7205) (make-vect 0.5582 0.7005))
 		    (make-segment (make-vect 0.5582 0.7005) (make-vect 0.5911 0.6806))
@@ -571,11 +571,11 @@
 		    (make-segment (make-vect 0.776 0.8177) (make-vect 0.7752 0.8446))
 		    (make-segment (make-vect 0.7752 0.8446) (make-vect 0.7769 0.8628))
 		    (make-segment (make-vect 0.7769 0.8628) (make-vect 0.7648 0.8924))
-		    
+
 		    (make-segment (make-vect 0.5582 0.7569) (make-vect 0.559 0.7457))
 		    (make-segment (make-vect 0.559 0.7457) (make-vect 0.5694 0.7274))
 		    (make-segment (make-vect 0.5694 0.7274) (make-vect 0.6085 0.6953))
-		    
+
 		    (make-segment (make-vect 0.5703 0.7734) (make-vect 0.5729 0.7474))
 		    (make-segment (make-vect 0.5729 0.7474) (make-vect 0.6007 0.7169))
 		    (make-segment (make-vect 0.6007 0.7169) (make-vect 0.6233 0.7023))
@@ -584,7 +584,7 @@
 		    (make-segment (make-vect 0.6701 0.7101) (make-vect 0.6884 0.7292))
 		    (make-segment (make-vect 0.6884 0.7292) (make-vect 0.6962 0.7578))
 		    (make-segment (make-vect 0.6962 0.7578) (make-vect 0.6979 0.7969))
-		    
+
 		    (make-segment (make-vect 0.4384 0.7595) (make-vect 0.4835 0.7786))
 		    (make-segment (make-vect 0.4835 0.7786) (make-vect 0.5069 0.7917))
 		    (make-segment (make-vect 0.5069 0.7917) (make-vect 0.5217 0.8073))
@@ -602,7 +602,7 @@
 		    (make-segment (make-vect 0.6059 0.7439) (make-vect 0.6484 0.7387))
 		    (make-segment (make-vect 0.6484 0.7387) (make-vect 0.6745 0.7457))
 		    (make-segment (make-vect 0.6745 0.7457) (make-vect 0.6858 0.7726))
-		    
+
 		    ;; Mouth piece
 		    (make-segment (make-vect 0.5642 0.4444) (make-vect 0.5868 0.4375))
 		    (make-segment (make-vect 0.5868 0.4375) (make-vect 0.6094 0.4236))
@@ -612,7 +612,7 @@
 		    (make-segment (make-vect 0.6571 0.3924) (make-vect 0.6675 0.3836))
 		    (make-segment (make-vect 0.6675 0.3836) (make-vect 0.6849 0.3863))
 		    (make-segment (make-vect 0.6849 0.3863) (make-vect 0.6892 0.3915))
-		    
+
 		    (make-segment (make-vect 0.5677 0.5269) (make-vect 0.5981 0.5312))
 		    (make-segment (make-vect 0.5981 0.5312) (make-vect 0.6372 0.5078))
 		    (make-segment (make-vect 0.6372 0.5078) (make-vect 0.6719 0.4714))
@@ -634,7 +634,7 @@
 		    (make-segment (make-vect 0.7023 0.2274) (make-vect 0.6589 0.2231))
 		    (make-segment (make-vect 0.6589 0.2231) (make-vect 0.5825 0.2422))
 		    (make-segment (make-vect 0.5825 0.2422) (make-vect 0.5009 0.2639))
-		    
+
 		    ;; T-Rex Head Outline
 		    (make-segment (make-vect 0.4887 0.934) (make-vect 0.4722 0.9306))
 		    (make-segment (make-vect 0.4722 0.9306) (make-vect 0.4566 0.9201))
@@ -738,7 +738,7 @@
 		      (make-segment (make-vect 0.56 0.87) (make-vect 0.56 0.86))
 		      (make-segment (make-vect 0.575 0.87) (make-vect 0.575 0.86))
 		      (make-segment (make-vect 0.56 0.86) (make-vect 0.575 0.86))
-		      
+
 		      ;; Helpers
 		      ;; Cross-hairs
 		      ;;(make-segment (make-vect 0.5 0.6) (make-vect 0.5 0.4))
@@ -751,8 +751,8 @@
 		      ;;(make-segment (make-vect 0.65 1) (make-vect 0.65 0))
 		      ;;(make-segment (make-vect 0.4 1) (make-vect 0.4 0))
 		      ;;(make-segment (make-vect 0.6 1) (make-vect 0.6 0))
-		      ;; Body Line 
-		      ;;(make-segment (make-vect 0 0.6) (make-vect 1 0.6)) 
+		      ;; Body Line
+		      ;;(make-segment (make-vect 0 0.6) (make-vect 1 0.6))
 		      )))
 
 ;; Part B

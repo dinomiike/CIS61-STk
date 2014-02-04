@@ -6,11 +6,11 @@
 		(* n n)
 	)
 	(define (proc)
-		(if (<= (count x) loop) 
+		(if (<= (count x) loop)
 			(
 				;; Then
-				(define loop (+ loop 1)) 
-				(define y (sentence y (square (item loop x)))) 
+				(define loop (+ loop 1))
+				(define y (sentence y (square (item loop x))))
 				proc
 			)
 			(
@@ -31,7 +31,7 @@
 	(define (proc)
 		(if (<= loop (count x))
 			(
-				(define loop (+ loop 1)) 
+				(define loop (+ loop 1))
 				(define y (sentence y (square (item loop x))))
 				(proc)
 			)
@@ -46,7 +46,7 @@
 (cond ((= 1 1)
 	(define x 9)
 	(define y 10))
-	(else 
+	(else
 	(define x 1)
 	(define y 1))
 )

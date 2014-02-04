@@ -34,13 +34,13 @@
   (method (gone thing)
     (if (not (memq thing things))
 	(error "Disappearing thing not here" (list name thing)))
-    (set! things (delete thing things)) 
+    (set! things (delete thing things))
     'disappeared)
   (method (exit person)
     (for-each (lambda (proc) (proc)) exit-procs)
     (if (not (memq person people))
 	(error "Disappearing person not here" (list name person)))
-    (set! people (delete person people)) 
+    (set! people (delete person people))
     'disappeared)
   ;; Problem B4B
   (method (place?) #t)
@@ -90,7 +90,7 @@
 	  (else
 	   (announce-take name thing)
 	   (set! possessions (cons thing possessions))
-	       
+
 	   ;; If somebody already has this object...
 	   (for-each
 	    (lambda (pers)
@@ -100,7 +100,7 @@
 		   (ask pers 'lose thing)
 		   (have-fit pers))))
 	    (ask place 'people))
-	       
+
 	   (ask thing 'change-possessor self)
 	   'taken)))
   (method (take-all)
@@ -268,7 +268,7 @@
   (method (fries?) #t)
   (default-method
     (ask self 'get message)))
-  
+
 
 
 

@@ -76,7 +76,7 @@
     (if (eq? answer 'scheme)
 	(print "Good answer, but my favorite is Logo!")
 	(begin (newline) (bh-office-exit)))))
-    
+
 
 (ask s-h 'add-entry-procedure
  (lambda () (print "Miles and miles of students are waiting in line...")))

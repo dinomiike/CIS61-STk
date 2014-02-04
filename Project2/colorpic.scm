@@ -24,7 +24,7 @@
 ;; 5 purple
 ;; 6 yellow
 ;; 7 white
-(define (draw-colored-line c v1 v2)  
+(define (draw-colored-line c v1 v2)
   (setpc (cdr (assoc c
 		     '((black . 0)
 		       (blue . 1)

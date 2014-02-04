@@ -14,5 +14,5 @@ STk> (transcript-off)
 ;; =================================================
 
 This works but it doesn't check, if the message is withdraw, that the amount is less than the balance.
-I can't think of a way to do it without modifying the rest of the procedure. If you have to only modify 
+I can't think of a way to do it without modifying the rest of the procedure. If you have to only modify
 that let, I think you have to accept the possibility of the procedure returning negative numbers.

@@ -154,13 +154,13 @@
 
 (define corner3 (quartet corner2 side2 (rotate90 side2) (rotate90 fish1)))
 
-(define escher-fish (cycle corner3))  
+(define escher-fish (cycle corner3))
 
 (define (draw-escher-fish)
   (escher-fish (make-frame (make-vect -0.8 -0.8)
 			   (make-vect 2.6 0)
 			   (make-vect 0 2.6))))
-  
+
 
 
 
